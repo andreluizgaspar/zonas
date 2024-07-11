@@ -1,3 +1,6 @@
+#### TODO
+mostrar imagem do local?
+
 Solução atual para consulta de zoneamento é fraca e pouco útil. Não retorna todas as informações necessárias.
 O projeto consiste de criar uma plataforma simples que retorne todas as informações necessárias ao consultar um endereço.
 #### Nossa solução deve:
