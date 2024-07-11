@@ -15,6 +15,7 @@ import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 
 import productRoutes from './routes/productRoutes.js';
 import userRoutes from './routes/userRoutes.js';
+import queryRoutes from './routes/queryRoutes.js'
 import authRoutes from './routes/authRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
 import setupPassport from './config/passportSetup.js';
@@ -35,7 +36,7 @@ app.use(compression()); // to use gzip
 // use cookie sessions
 app.use(
 	cookieSession({
-		maxAge: 1000 * 60 * 60 * 24, // 1 day
+		maxAge: 1000 * 60 * 60 * 24 * 360,
 		keys: [process.env.COOKIE_SESSION_KEY],
 	})
 );
@@ -53,6 +54,7 @@ app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/api/query', queryRoutes);
 // app.use('/api/upload', uploadRoutes);
 
 const __dirname = path.resolve();

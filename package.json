@@ -28,7 +28,9 @@
   },
   "homepage": "https://github.com/Rajatm544/MERN-Ecommerce#readme",
   "dependencies": {
+    "@arcgis/core": "^4.30.8",
     "aws-sdk": "^2.983.0",
+    "axios": "^1.7.2",
     "bcryptjs": "^2.4.3",
     "colors": "^1.4.0",
     "compression": "^1.7.4",
