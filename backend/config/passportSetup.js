@@ -58,13 +58,11 @@ const setupPassport = () => {
 	passport.use(
 		new GoogleStrategy(
 			{
-				// options for the google strategy
 				clientID: process.env.GOOGLE_OAUTH_CLIENT_ID,
 				clientSecret: process.env.GOOGLE_OAUTH_CLIENT_SECRET,
 				callbackURL: `${backendURL}/api/auth/google/redirect`,
 			},
 			(accessToken, refreshToken, profile, done) => {
-				// if a user with this google ID is present, serialise that user, otherwise create a new User
 				User.findOne({ googleID: profile.id }).then((foundUser) => {
 					if (!foundUser) {
 						User.create({
@@ -82,7 +80,8 @@ const setupPassport = () => {
 								// In case the User couldn't be created, this means that the email key was duplicate
 								// Which implies that the current email has already been registered using some different social account
 								// So throw the corresponding flash message
-								handleAuthError(err, done);
+								// handleAuthError(err, done);
+								console.log(err)
 							});
 					} else {
 						done(null, foundUser);

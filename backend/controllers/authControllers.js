@@ -6,6 +6,7 @@ const frontendURL = process.env.FRONTEND_BASE_URL;
 
 // controller for the routes that handle the success redirects from all 4 passport strategies
 const passportLoginSuccess = asyncHandler(async (req, res) => {
+	console.log('yeah')
 	res.redirect(`${frontendURL}/login?login=success&id=${req.user._id}`);
 });
 

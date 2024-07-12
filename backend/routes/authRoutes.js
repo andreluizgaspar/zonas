@@ -20,12 +20,22 @@ router.route('/google').get(
 // @route GET /api/auth/google/redirect
 // @access PUBLIC
 router.route('/google/redirect').get(
-	passport.authenticate('google', {
-		successRedirect: '/api/auth/google/redirect/success',
-		failureRedirect: '/api/auth/google/redirect/failure',
-		failureFlash: true,
-	})
-);
+	passport.authenticate('google', { failureRedirect: 'http://localhost:3001/api/auth/google/redirect/failure', failureFlash: true }),
+	(err, req, res, next) => {
+	  if (err.name === 'TokenError') {
+		console.log(err)
+		console.log('eita')
+		res.redirect('/auth/google'); // Redirect them back to the login page
+	  } else {
+		// Handle other errors here
+		res.redirect('http://localhost:3001/api/auth/google/redirect/failure'); // Redirect to failure page
+	  }
+	},
+	(req, res) => {
+	  res.redirect('http://localhost:3001/api/auth/google/redirect/success'); // On success, redirect back to success page
+	}
+  );
+  
 
 // @desc redirect route for the passport google strategy
 // @route GET /api/auth/google/redirect

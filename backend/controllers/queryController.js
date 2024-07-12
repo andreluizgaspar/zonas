@@ -32,10 +32,8 @@ const query = asyncHandler(async (req, res) => {
                 location.latitude = latitude.toString()
                 location.longitude = longitude.toString()
 
-                console.log('Latitude:', latitude);
-                console.log('Longitude:', longitude);
             } else {
-                console.log('No results found.');
+                console.log('bruh');
             }
         })
         .catch((error) => {
@@ -73,7 +71,6 @@ const query = asyncHandler(async (req, res) => {
                 geometry: JSON.stringify(extent.toJSON()),
                 outFields: 'OBJECTID_12,OBJECTID_1,OBJECTID,ZONEAMENTO,ITEM,LEI_12236_,PARÂMETRO,SHAPE_LENG,CORRECAO,SHAPE.AREA,SHAPE.LEN',
                 layer: JSON.stringify({ "source": { "type": "mapLayer", "mapLayerId": 6 } })
-                // layer: JSON.stringify({"source":{"type":"mapLayer","mapLayerId":6}})
             }
         });
 
