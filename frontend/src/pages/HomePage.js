@@ -11,16 +11,39 @@ import { refreshLogin, getUserDetails } from '../actions/userActions';
 import Message from '../components/Message';
 import SearchBox from '../components/SearchBox';
 import ProductSkeleton from '../components/ProductSkeleton';
+import GoogleMapReact from 'google-map-react';
 
 const HomePage = ({ match, history }) => {
-	const keyword = match.params.keyword; // to search for products
-	const pageNumber = Number(match.params.pageNumber) || 1; // current page number in the paginated display
-	const [promptVerfication, setPromptVerification] = useState(false); // prompt user to verify email if not yet confirmed
+	function getUserLocation() {
+		return new Promise((resolve, reject) => {
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(
+					(position) => {
+						const { latitude, longitude } = position.coords;
+						resolve({ lat: latitude, lng: longitude });
+					},
+					(error) => reject(error)
+				);
+			} else {
+				reject(new Error("Geolocation not supported by this browser."));
+			}
+		});
+	}
+
+	const defaultProps = {
+		center: {
+			lat: 10.99835602,
+			lng: 77.01502627
+		},
+		zoom: 11
+	};
+	const keyword = match.params.keyword;
+	const pageNumber = Number(match.params.pageNumber) || 1;
+	const [promptVerfication, setPromptVerification] = useState(false);
 	const [products, setProducts] = useState(null);
 	const [productAvailable, setProductAvailable] = useState(false);
 	const dispatch = useDispatch();
 
-	// get the products list, userinfo and user details form the redix store
 	const productList = useSelector((state) => state.productList);
 	let { loading, error, pages } = productList;
 
@@ -30,7 +53,20 @@ const HomePage = ({ match, history }) => {
 	const userDetails = useSelector((state) => state.userDetails);
 	const { error: userInfoError } = userDetails;
 
-	// fetch the user details
+	const [center, setCenter] = useState({ lat: 0, lng: 0 });
+	const [zoom, setZoom] = useState(11);
+
+	useEffect(() => {
+		getUserLocation()
+			.then((coords) => {
+				setCenter(coords);
+			})
+			.catch((error) => {
+				console.error("Error fetching user location:", error);
+				setCenter({ lat: 37.7749, lng: -122.4194 });
+			});
+	}, []);
+
 	useEffect(() => {
 		userInfo
 			? userInfo.isSocialLogin
@@ -39,7 +75,6 @@ const HomePage = ({ match, history }) => {
 			: dispatch(getUserDetails('profile'));
 	}, [userInfo, dispatch]);
 
-	// refresh token to get new access token if error in user details
 	useEffect(() => {
 		if (userInfoError && userInfo && !userInfo.isSocialLogin) {
 			const user = JSON.parse(localStorage.getItem('userInfo'));
@@ -47,7 +82,6 @@ const HomePage = ({ match, history }) => {
 		}
 	}, [userInfoError, dispatch, userInfo]);
 
-	// set a state variable to true or false depending on if products is avialable in the state
 	useEffect(() => {
 		if (products) {
 			products.length
@@ -56,20 +90,16 @@ const HomePage = ({ match, history }) => {
 		}
 	}, [products]);
 
-	// fetch products from redux store into local state
 	useEffect(() => {
 		if (productList) {
 			if (productList.products) setProducts([...productList.products]);
 		}
 	}, [productList]);
 
-	// list products based on keyword and pagenumber
 	useEffect(() => {
 		dispatch(listProducts(keyword, pageNumber));
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [dispatch, keyword, pageNumber]);
 
-	// check if user needs to be promted about email verification on page load
 	useEffect(() => {
 		setPromptVerification(
 			localStorage.getItem('promptEmailVerfication') === 'true'
@@ -81,22 +111,10 @@ const HomePage = ({ match, history }) => {
 	return (
 		<>
 			<Meta />
-			{/* display carousel only on larger screens */}
-			{!keyword ? (
-				window.innerWidth > 430 && <ProductCarousel />
-			) : (
-				<Link
-					className='btn btn-outline btn-outline-primary my-2'
-					to='/'>
-					Go Back
-				</Link>
-			)}
-			{/* display this search bar on home page on mobile screens */}
 			<div className='d-block d-md-none'>
 				<SearchBox history={history} />
 			</div>
 
-			{/* if the user needs to be prompted about email verification, show this message */}
 			{promptVerfication ? (
 				<Message dismissible variant='info' duration={10}>
 					Account Created! Please check your email to verify your
@@ -108,59 +126,21 @@ const HomePage = ({ match, history }) => {
 				<Message dismissible variant='danger' duration={10}>
 					{error}
 				</Message>
-			) : !loading && products ? (
-				<>
-					<Row>
-						{products.length
-							? products.map((product) => {
-									return (
-										<Col
-											sm={12}
-											md={6}
-											lg={4}
-											xl={3}
-											key={product._id}>
-											<Product product={product} />
-										</Col>
-									);
-							  })
-							: keyword &&
-							  !productAvailable && (
-									//   show this only if user has searched for some item and it is not available
-									<Col className='text-center'>
-										<div>
-											<i className='far fa-frown' /> No
-											items found for this search query
-										</div>
-										Go Back to the{' '}
-										<Link to='/'>Home Page</Link>
-									</Col>
-							  )}
-					</Row>
-					<Paginate
-						className='mt-auto text-center'
-						page={pageNumber}
-						keyword={keyword ? keyword : ''}
-						pages={pages}
-					/>
-				</>
-			) : (
-				loading &&
-				products &&
-				products.length === 0 && (
-					<Row>
-						{[1, 2, 3, 4].map((ele) => {
-							return (
-								<Col sm={12} md={6} lg={4} xl={3} key={ele}>
-									<div>
-										<ProductSkeleton />
-									</div>
-								</Col>
-							);
-						})}
-					</Row>
-				)
-			)}
+			) : !loading &&
+			<div style={{ height: '100vh', width: '100%' }}>
+				<GoogleMapReact
+					bootstrapURLKeys={{ key: "AIzaSyAr1Yvl5beQkFsjeA4tYOq4uCNP4b3f1bQ" }}
+					defaultCenter={center}
+					defaultZoom={zoom}
+				>
+					<button
+						lat={59.955413}
+						lng={30.337844}
+						text="My Marker"
+					>test</button>
+				</GoogleMapReact>
+			</div>
+			}
 		</>
 	);
 };

@@ -25,9 +25,9 @@ const query = asyncHandler(async (req, res) => {
         })
         .then((response) => {
             if (response.data.results.length > 0) {
-                const location = response.data.results[0].geometry.location;
-                const latitude = location.lat;
-                const longitude = location.lng;
+                const coords = response.data.results[0].geometry.location;
+                const latitude = coords.lat;
+                const longitude = coords.lng;
 
                 location.latitude = latitude.toString()
                 location.longitude = longitude.toString()
