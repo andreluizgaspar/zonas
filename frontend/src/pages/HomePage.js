@@ -80,7 +80,6 @@ const HomePage = ({ match, history, sendMsg, msgs, toggleSidebar, isSidebarOpen 
 	}
 
 	useEffect(() => {
-		console.log(msgs)
 		getUserLocation()
 			.then((coords) => {
 				setCenter(coords);
@@ -131,12 +130,11 @@ const HomePage = ({ match, history, sendMsg, msgs, toggleSidebar, isSidebarOpen 
 						</div>
 					</div>
 					<div class="chat-messages" id="chatMessages">
-						{
-							msgs.map(msg => {
-								return <p>{msg}</p>
-							}
-							)
-						}
+						{msgs.map((msg, index) => (
+							<div key={index} className={`message ${msg.type}`}>
+								{msg.content}
+							</div>
+						))}
 					</div>
 					<div class="chat-input">
 						<input type="text" id="messageInput" onKeyPress={handleKeyPress} onChange={(e) => { handleInputOnChange(e.target.value) }} value={query} placeholder="Type your message..." />

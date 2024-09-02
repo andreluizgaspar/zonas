@@ -1,0 +1,128 @@
+[
+    {
+        "zone": "ZR2",
+        "unidadeHabitacionalCada": "250m²",
+        "frenteMinimaLarguraMedia": {
+            "meioQuadra": "10m"
+        },
+        "taxaOcupacaoMaxima": "60%",
+        "coeficienteAproveitamentoMinimo": "0.05",
+        "coeficienteAproveitamentoMaximo": "1.2",
+        "alturaMaxima": "8m",
+        "recuoMinimo": "5m",
+        "afastamentosMinimos": {
+            "abertura": "1.5m",
+            "semAbertura": "1m"
+        },
+        "areaInfiltracao": "20% área total",
+        "numeroMaximoUnidadesHabitacionais": "25 un"
+    },
+    {
+        "zone": "ZR3",
+        "unidadeHabitacionalCada": "200m²",
+        "frenteMinimaLarguraMedia": {
+            "meioQuadra": "8m"
+        },
+        "taxaOcupacaoMaxima": "65%",
+        "coeficienteAproveitamentoMinimo": "0.05",
+        "coeficienteAproveitamentoMaximo": "1.3",
+        "alturaMaxima": "8m",
+        "recuoMinimo": "5m",
+        "afastamentosMinimos": {
+            "abertura": "1.5m",
+            "semAbertura": "1m"
+        },
+        "areaInfiltracao": "20% área total",
+        "numeroMaximoUnidadesHabitacionais": "25 un"
+    },
+    {
+        "zone": "ZR4",
+        "unidadeHabitacionalCada": "250m²",
+        "frenteMinimaLarguraMedia": {
+            "meioQuadra": "10m"
+        },
+        "taxaOcupacaoMaxima": "60%",
+        "coeficienteAproveitamentoMinimo": "0.05",
+        "coeficienteAproveitamentoMaximo": "1.2",
+        "alturaMaxima": "8m",
+        "recuoMinimo": "5m",
+        "afastamentosMinimos": {
+            "abertura": "1.5m",
+            "semAbertura": "1m"
+        },
+        "areaInfiltracao": "20% área total",
+        "numeroMaximoUnidadesHabitacionais": "25 un"
+    },
+    {
+        "zone": "ZR5",
+        "unidadeHabitacionalCada": "250m²",
+        "frenteMinimaLarguraMedia": {
+            "meioQuadra": "10m"
+        },
+        "taxaOcupacaoMaxima": "60%",
+        "coeficienteAproveitamentoMinimo": "0.05",
+        "coeficienteAproveitamentoMaximo": "1.2",
+        "alturaMaxima": "8m",
+        "recuoMinimo": "5m",
+        "afastamentosMinimos": {
+            "abertura": "1.5m",
+            "semAbertura": "1m"
+        },
+        "areaInfiltracao": "20% área total",
+        "numeroMaximoUnidadesHabitacionais": "25 un"
+    },
+    {
+        "zone": "ZR7",
+        "unidadeHabitacionalCada": "450m²",
+        "frenteMinimaLarguraMedia": {
+            "meioQuadra": "12m"
+        },
+        "taxaOcupacaoMaxima": "50%",
+        "coeficienteAproveitamentoMinimo": "0.05",
+        "coeficienteAproveitamentoMaximo": "1",
+        "alturaMaxima": "8m",
+        "recuoMinimo": "5m",
+        "afastamentosMinimos": {
+            "abertura": "1.5m",
+            "semAbertura": "1m"
+        },
+        "areaInfiltracao": "20% área total",
+        "numeroMaximoUnidadesHabitacionais": "25 un"
+    },
+    {
+        "zone": "ZR8",
+        "unidadeHabitacionalCada": "250m²",
+        "frenteMinimaLarguraMedia": {
+            "meioQuadra": "10m"
+        },
+        "taxaOcupacaoMaxima": "60%",
+        "coeficienteAproveitamentoMinimo": "0.05",
+        "coeficienteAproveitamentoMaximo": "1.2",
+        "alturaMaxima": "8m",
+        "recuoMinimo": "5m",
+        "afastamentosMinimos": {
+            "abertura": "1.5m",
+            "semAbertura": "1m"
+        },
+        "areaInfiltracao": "20% área total",
+        "numeroMaximoUnidadesHabitacionais": "25 un"
+    },
+    {
+        "zone": "ZR9",
+        "unidadeHabitacionalCada": "250m²",
+        "frenteMinimaLarguraMedia": {
+            "meioQuadra": "10m"
+        },
+        "taxaOcupacaoMaxima": "60%",
+        "coeficienteAproveitamentoMinimo": "0.05",
+        "coeficienteAproveitamentoMaximo": "1.2",
+        "alturaMaxima": "8m",
+        "recuoMinimo": "5m",
+        "afastamentosMinimos": {
+            "abertura": "1.5m",
+            "semAbertura": "1m"
+        },
+        "areaInfiltracao": "20% área total",
+        "numeroMaximoUnidadesHabitacionais": "25 un"
+    }
+]

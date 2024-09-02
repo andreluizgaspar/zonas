@@ -1,4 +1,5 @@
 import asyncHandler from 'express-async-handler';
+import { MongoClient } from 'mongodb';
 import { Client } from "@googlemaps/google-maps-services-js";
 import axios from 'axios';
 import zoneController from './zoneController.js';
@@ -10,9 +11,38 @@ import { project } from "@arcgis/core/geometry/projection.js";
 const query = asyncHandler(async (req, res) => {
     const query = req.body.query
     const client = new Client({});
+
     let location = {
         latitude: '',
         longitude: ''
+    }
+
+    const getZoneInfo = async (zone) => {
+        const url = 'mongodb://localhost:27017';
+        const dbName = 'test';
+
+        try {
+            const client = new MongoClient(url);
+            await client.connect();
+
+            const db = client.db(dbName);
+            const collection = db.collection('zones_info');
+
+            const zoneInfo = await collection.findOne({ zone: zone });
+
+            console.log('getZoneInfo 33')
+            console.log(zone)
+            console.log(zoneInfo)
+            await client.close();
+
+            if (zoneInfo === null) {
+                return 'zone error'
+            }
+            return zoneInfo
+        } catch (error) {
+            console.error('getZoneInfo 40 error db: ', error);
+            return {error: error.toString()}
+        }
     }
 
     await client
@@ -33,7 +63,7 @@ const query = asyncHandler(async (req, res) => {
                 location.longitude = longitude.toString()
 
             } else {
-                console.log('bruh');
+                console.log(response.data)
             }
         })
         .catch((error) => {
@@ -74,7 +104,28 @@ const query = asyncHandler(async (req, res) => {
             }
         });
 
-        res.status(200).json(response.data);
+        if (response.data.features.length != 0) {
+            console.log(response.data.features[0].attributes)
+            getZoneInfo(response.data.features[0].attributes.ZONEAMENTO).then((info) => {
+                console.log(info)
+                if (info === 'zone error') {
+                    res.status(200).json({
+                        error: 'Zona nao consta na db'
+                    });
+                }
+                res.status(200).json(info);
+            })
+                .catch((error) => {
+                    res.status(200).json({
+                        error: error
+                    });
+                });
+        }
+        else {
+            res.status(200).json({
+                error: 'Endereco nao valido. Escreva corretamento um endereco de londrina'
+            });
+        }
     } catch (error) {
         console.error('Error fetching data:', error);
         res.status(500).json({ error: 'An error occurred while fetching data.' });

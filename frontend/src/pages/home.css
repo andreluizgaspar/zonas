@@ -18,6 +18,16 @@
     transition: none;
 }
 
+.message.user {
+    align-self: flex-end;
+    background-color: #dcf8c6;
+}
+
+.message.system {
+    align-self: flex-start;
+    background-color: #ffffff;
+}
+
 body {
     margin: 0 !important;
 }
