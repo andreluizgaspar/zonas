@@ -14,6 +14,15 @@ const HomeController = ({ match, history }) => {
         setInitial(false);
     }, []);
 
+    useEffect(() => {
+        const userInfo = localStorage.getItem('userInfo')
+        if (!userInfo) {
+            history.push('/login')
+        } else {
+            setInitial(false)
+        }
+    }, [history])
+
     const handleToggleSidebar = () => {
         setShowSidebar((prevShowSidebar) => !prevShowSidebar);
     };
