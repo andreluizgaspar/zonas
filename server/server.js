@@ -10,7 +10,8 @@ import path from 'path';
 // middleware
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 
-import queryRoutes from './routes/queryRoutes.js'
+import queryRoutes from './routes/queryRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 
 dotenv.config();
 const app = express();
@@ -26,16 +27,17 @@ app.use(cors()); // to avoid CORS errors
 app.use(compression()); // to use gzip
 
 // configure all the routes
+app.use('/api/users', userRoutes);
 app.use('/api/query', queryRoutes);
 
 const __dirname = path.resolve();
 
 // To prepare for deployment
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '/frontend/build')));
+    app.use(express.static(path.join(__dirname, '/client/build')));
 
     app.use('*', (req, res) =>
-        res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
     );
 }
 

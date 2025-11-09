@@ -1,0 +1,98 @@
+---
+config:
+  theme: base
+  layout: elk
+---
+classDiagram
+    class Usuario {
+        -id: String
+        -nome: String
+        -email: String
+        -senha: String
+        +autenticar(): Boolean
+        +salvarHistorico(): void
+    }
+    class Consulta {
+        -id: String
+        -endereco: String
+        -coordenadas: Coordenadas
+        -timestamp: Date
+        -usuario: Usuario
+        -resultado: ResultadoZoneamento
+        +processarConsulta(): ResultadoZoneamento
+        +formatarResposta(): String
+        +salvarConsulta(): void
+    }
+    class Coordenadas {
+        -latitude: Float
+        -longitude: Float
+        -wkid: Integer
+        +converter(): CoordenadasWKID
+        +validar(): Boolean
+    }
+    class ResultadoZoneamento {
+        -zona: String
+        -categoria: String
+        -hierarquia: String
+        -caracteristicas: String
+        -acessoLei: String
+        -recuos: Recuos
+        -parametrosUrbanisticos: ParametrosUrbanisticos
+        +gerarResumo(): String
+    }
+    class Recuos {
+        -frontal: Float
+        -lateral: Float
+        -fundos: Float
+        -entreBloco: Float
+        +calcularAreaLivre(): Float
+        +validarRecuos(): Boolean
+    }
+    class ParametrosUrbanisticos {
+        -coeficienteAproveitamento: Float
+        -taxaOcupacao: Float
+        -alturaMaxima: Float
+        -vagas: Integer
+        +calcularPotencialConstrutivo(): Float
+        +validarParametros(): Boolean
+    }
+    class ApiArcGIS {
+        -baseUrl: String
+        -parametros: Map
+        +consultarZoneamento(coordenadas): Object
+        +consultarHierarquiaVias(coordenadas): Object
+        +formatarParametros(): String
+    }
+    class ProcessadorEndereco {
+        -mapsApi: GoogleMapsAPI
+        +converterEnderecoParaCoordenadas(endereco): Coordenadas
+        +processarEntradaNatural(texto): Endereco
+        +validarEndereco(): Boolean
+    }
+    class GoogleMapsAPI {
+        -apiKey: String
+        +geocoding(endereco): Coordenadas
+        +reverseGeocoding(coordenadas): Endereco
+    }
+    class ChatInterface {
+        -historicoConversa: Array
+        +processarMensagem(texto): String
+        +formatarRespostaAmigavel(): String
+        +adicionarContexto(): void
+    }
+    class DatabaseService {
+        -conexao: MongoDB
+        +salvarConsulta(consulta): void
+        +buscarHistorico(usuario): Array
+        +estatisticas(): Object
+    }
+    Usuario "1" o-- "0..*" Consulta : realiza
+    Consulta "1" *-- "1" Coordenadas : contém
+    Consulta "1" *-- "1" ResultadoZoneamento : gera
+    ResultadoZoneamento "1" *-- "1" Recuos : define
+    ResultadoZoneamento "1" *-- "1" ParametrosUrbanisticos : contém
+    Consulta ..> ApiArcGIS : utiliza
+    Consulta ..> ProcessadorEndereco : utiliza
+    ProcessadorEndereco ..> GoogleMapsAPI : utiliza
+    ChatInterface ..> Consulta : cria
+    DatabaseService ..> Consulta : persiste
