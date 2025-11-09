@@ -1,20 +1,12 @@
 {
-  "name": "mern-ecommerce-app",
+  "name": "zonas-frontend",
   "version": "1.0.0",
-  "description": "MERN stack E-commerce app",
-  "main": "server.js",
-  "type": "module",
-  "engines": {
-    "node": "14.x"
-  },
+  "description": "Frontend for the Zonas application",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node backend/server.js",
-    "server": "nodemon backend/server.js",
     "client": "npm start --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "data:import": "node backend/seeder.js",
-    "data:destroy": "node backend/seeder.js -d",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
   },
   "repository": {
@@ -28,39 +20,9 @@
   },
   "homepage": "https://github.com/Rajatm544/MERN-Ecommerce#readme",
   "dependencies": {
-    "@arcgis/core": "^4.30.8",
-    "@googlemaps/google-maps-services-js": "^3.4.0",
-    "aws-sdk": "^2.1658.0",
-    "axios": "^1.7.2",
-    "bcryptjs": "^2.4.3",
-    "colors": "^1.4.0",
-    "compression": "^1.7.4",
-    "connect-flash": "^0.1.1",
-    "cookie-session": "^2.1.0",
-    "core-js": "^3.37.1",
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
-    "express": "^4.19.2",
-    "express-async-handler": "^1.2.0",
-    "express-session": "^1.18.0",
-    "google-map-react": "^2.2.1",
-    "gravatar": "^1.8.2",
-    "jsonwebtoken": "^9.0.2",
-    "mongodb": "^6.8.0",
-    "mongoose": "^8.5.0",
-    "morgan": "^1.10.0",
-    "multer": "^1.4.3",
-    "multer-s3": "^3.0.1",
-    "nodemailer": "^6.9.14",
-    "passport": "^0.5.3",
-    "passport-github2": "^0.1.12",
-    "passport-google-oauth20": "^2.0.0",
-    "passport-linkedin-oauth2": "^2.0.0",
-    "passport-twitter": "^1.0.4",
-    "stripe": "^16.2.0"
+    "google-map-react": "^2.2.1"
   },
   "devDependencies": {
-    "concurrently": "^8.2.2",
-    "nodemon": "^3.1.4"
+    "concurrently": "^8.2.2"
   }
 }

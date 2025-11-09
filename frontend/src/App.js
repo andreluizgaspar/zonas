@@ -1,30 +1,50 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import LoginController from './controllers/loginController';
-import RegisterPage from './pages/RegisterPage';
-import PasswordResetPage from './pages/PasswordResetPage';
-import ErrorPage from './pages/ErrorPage';
-import PaymentPage from './pages/PaymentPage';
-import ServiceWorkerWrapper from './ServiceWorkerWrapper';
-import HomeController from './controllers/homeController';
+import React, { useState } from 'react';
+import axios from 'axios';
 
-const App = () => {
-	return (
-		<Router>
-			<ServiceWorkerWrapper />
-			<Switch>
-				<Route path='/' component={HomeController} exact />
-				<Route path='/login' component={LoginController} />
-				<Route path='/register' component={RegisterPage} />
-				<Route
-					path='/user/password/reset/:token'
-					component={PasswordResetPage}
-				/>
-				<Route path='/payment' component={PaymentPage} />
-				<Route component={ErrorPage} />
-			</Switch>
-		</Router>
-	);
-};
+function App() {
+    const [address, setAddress] = useState('');
+    const [zoneInfo, setZoneInfo] = useState(null);
+    const [error, setError] = useState(null);
+
+    const handleQuery = async () => {
+        try {
+            const response = await axios.post('http://localhost:5000/api/query', {
+                query: address,
+            });
+            setZoneInfo(response.data);
+            setError(null);
+        } catch (error) {
+            setError(error.response.data.error);
+            setZoneInfo(null);
+        }
+    };
+
+    return (
+        <div className="App">
+            <header className="App-header">
+                <h1>Zone Finder</h1>
+                <input
+                    type="text"
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                    placeholder="Enter an address"
+                />
+                <button onClick={handleQuery}>Find Zone</button>
+                {zoneInfo && (
+                    <div>
+                        <h2>Zone Information</h2>
+                        <pre>{JSON.stringify(zoneInfo, null, 2)}</pre>
+                    </div>
+                )}
+                {error && (
+                    <div>
+                        <h2>Error</h2>
+                        <p>{error}</p>
+                    </div>
+                )}
+            </header>
+        </div>
+    );
+}
 
 export default App;
