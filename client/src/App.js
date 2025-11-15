@@ -58,10 +58,10 @@ function App() {
                 <Chat />
             ) : isRegistering ? (
                 <form onSubmit={handleRegister}>
-                    <h2>Register</h2>
+                    <h2>Criar conta</h2>
                     <input
                         type="text"
-                        placeholder="Name"
+                        placeholder="Nome"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                     />
@@ -73,13 +73,12 @@ function App() {
                     />
                     <input
                         type="password"
-                        placeholder="Password"
+                        placeholder="Senha"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
                     <button type="submit">Register</button>
                     <p>
-                        Already have an account?{' '}
                         <button type="button" onClick={() => setIsRegistering(false)}>
                             Login
                         </button>
