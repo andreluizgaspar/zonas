@@ -27,8 +27,8 @@ const query = asyncHandler(async (req, res) => {
 
         const zona = await apiArcGIS.consultarZoneamento(coordenadas.latitude, coordenadas.longitude);
 
-        console.log('zonas')
-        console.log(zonas)
+        console.log('zona')
+        console.log(zona)
 
         if (!zona) {
             res.status(404).json({ error: 'Could not find zone for the given address.' });
