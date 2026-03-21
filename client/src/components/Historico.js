@@ -94,13 +94,7 @@ const Historico = ({ usuario, onVisualizarConsulta }) => {
                             <div className="historico-info">
                                 <h4>{consulta.endereco}</h4>
                                 <p className="zona-tag">Zona: <strong>{consulta.resultado?.zona || 'N/A'}</strong></p>
-                                <p clas
-                                    className="btn-ver"
-                                    onClick={() => visualizarConsulta(consulta)}
-                                    title="Ver detalhes da consulta"
-                                >
-                                    👁️ Ver
-                                ta(consulta.createdAt)}</p>
+                                <p className="data-tag">{formatarData(consulta.createdAt)}</p>
                             </div>
 
                             <div className="historico-coordenadas">
@@ -110,7 +104,13 @@ const Historico = ({ usuario, onVisualizarConsulta }) => {
                             </div>
 
                             <div className="historico-actions">
-                                <button className="btn-ver">👁️ Ver</button>
+                                <button
+                                    className="btn-ver"
+                                    onClick={() => visualizarConsulta(consulta)}
+                                    title="Ver detalhes da consulta"
+                                >
+                                    👁️ Ver
+                                </button>
                                 <button
                                     className="btn-deletar"
                                     onClick={() => deletarConsulta(consulta._id)}

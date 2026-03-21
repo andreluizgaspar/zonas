@@ -46,7 +46,7 @@ const Chat = ({ usuario, showHistorico = false, consultaVisualizada = null }) =>
         if (consultaVisualizada) {
             setUltimoResultado(consultaVisualizada.resultado);
             setUltimasCoordenadas(consultaVisualizada.coordenadas);
-            
+
             // Adicionar mensagem do bot restaurando a consulta
             const botMessage = {
                 text: consultaVisualizada.resultado?.resumo || `Consultando: ${consultaVisualizada.endereco}`,

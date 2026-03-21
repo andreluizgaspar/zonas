@@ -9,7 +9,8 @@
         "axios": "^1.6.0",
         "leaflet": "^1.9.4",
         "react-markdown": "^9.0.0",
-        "rehype-raw": "^6.1.1"
+        "rehype-raw": "^6.1.1",
+        "http-proxy-middleware": "^2.0.6"
     },
     "scripts": {
         "start": "react-scripts start",
@@ -34,6 +35,5 @@
             "last 1 firefox version",
             "last 1 safari version"
         ]
-    },
-    "proxy": "http://localhost:5000"
+    }
 }
