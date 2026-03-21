@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
@@ -34,12 +34,28 @@ const IconAlert = () => (
     </svg>
 );
 
-const Chat = ({ usuario, showHistorico = false }) => {
+const Chat = ({ usuario, showHistorico = false, consultaVisualizada = null }) => {
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState('');
     const [carregando, setCarregando] = useState(false);
     const [ultimoResultado, setUltimoResultado] = useState(null);
     const [ultimasCoordenadas, setUltimasCoordenadas] = useState(null);
+
+    // Restaurar consulta quando o usuário clica "Ver" no histórico
+    useEffect(() => {
+        if (consultaVisualizada) {
+            setUltimoResultado(consultaVisualizada.resultado);
+            setUltimasCoordenadas(consultaVisualizada.coordenadas);
+            
+            // Adicionar mensagem do bot restaurando a consulta
+            const botMessage = {
+                text: consultaVisualizada.resultado?.resumo || `Consultando: ${consultaVisualizada.endereco}`,
+                sender: 'bot',
+                type: 'success'
+            };
+            setMessages([{ text: consultaVisualizada.endereco, sender: 'user' }, botMessage]);
+        }
+    }, [consultaVisualizada]);
 
     const sendMessage = async () => {
         if (input.trim() === '') return;

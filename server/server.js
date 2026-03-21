@@ -30,6 +30,9 @@ app.use(compression()); // to use gzip
 app.use('/api/users', userRoutes);
 app.use('/api/query', queryRoutes);
 
+// serve documentation PDFs
+app.use('/docs', express.static(path.join(path.resolve(), 'docs')));
+
 const __dirname = path.resolve();
 
 // To prepare for deployment

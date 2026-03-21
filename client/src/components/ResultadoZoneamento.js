@@ -16,6 +16,17 @@ const ResultadoZoneamento = ({ resultado, coordenadas, endereco, onSalvar }) => 
         parametrosUrbanisticos,
     } = resultado;
 
+    // Gerar nome do arquivo PDF baseado na zona
+    const getPdfFileName = (zoneName) => {
+        if (!zoneName) return null;
+        // ZC1 -> zc_1, ZR2 -> zr_2, ZI3 -> zi_3
+        const formatted = zoneName.toLowerCase().replace(/([a-z])(\d)/, '$1_$2');
+        return `${formatted}.pdf`;
+    };
+
+    const pdfFileName = getPdfFileName(zona);
+    const pdfUrl = pdfFileName ? `/docs/${pdfFileName}` : null;
+
     const handleSalvar = () => {
         if (onSalvar) {
             onSalvar({
@@ -64,6 +75,17 @@ const ResultadoZoneamento = ({ resultado, coordenadas, endereco, onSalvar }) => 
                             <h4>Zona de Zoneamento</h4>
                             <p>Categoria: <strong>{categoria}</strong></p>
                             <p>Hierarquia: <strong>{hierarquia}</strong></p>
+                            {pdfUrl && (
+                                <a
+                                    href={pdfUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="btn-documento"
+                                    title="Ver documentação da zona em PDF"
+                                >
+                                    📄 Ver Documentação
+                                </a>
+                            )}
                         </div>
                     </div>
                 </section>

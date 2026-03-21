@@ -120,6 +120,31 @@
     line-height: 1.5;
 }
 
+.btn-documento {
+    display: inline-block;
+    margin-top: 16px;
+    background: linear-gradient(135deg, var(--accent), #059669);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 13px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-documento:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.3);
+    background: linear-gradient(135deg, #059669, #047857);
+}
+
 /* Recuos Grid - Neomorfismo */
 .recuos-grid {
     display: grid;

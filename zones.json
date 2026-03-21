@@ -2,72 +2,72 @@
     {
         "zone": "ZR1",
         "descricao": "Residencial Unifamiliar - Baixíssima Densidade",
-        "loteMinimo": "500m² [cite: 279]",
+        "loteMinimo": "500m²",
         "frenteMinima": {
-            "meioQuadra": "15m [cite: 281]",
-            "esquina": "20m [cite: 282]"
+            "meioQuadra": "15m",
+            "esquina": "20m"
         },
-        "taxaOcupacaoMaxima": "50% [cite: 283]",
+        "taxaOcupacaoMaxima": "50%",
         "coeficienteAproveitamento": {
-            "minimo": "0.05 [cite: 285]",
-            "basico": "1 [cite: 286]",
-            "maximo": "1 [cite: 288]"
+            "minimo": "0.05",
+            "basico": "1",
+            "maximo": "1"
         },
-        "alturaMaxima": "8m [cite: 289]",
-        "recuoMinimo": "5m [cite: 291]"
+        "alturaMaxima": "8m",
+        "recuoMinimo": "5m"
     },
     {
         "zone": "ZR2",
         "descricao": "Residencial Unifamiliar - Baixa Densidade",
-        "loteMinimo": "360m² [cite: 362]",
+        "loteMinimo": "360m²",
         "frenteMinima": {
-            "meioQuadra": "12m [cite: 363]",
-            "esquina": "17m [cite: 364]"
+            "meioQuadra": "12m",
+            "esquina": "17m"
         },
-        "taxaOcupacaoMaxima": "60% [cite: 365]",
+        "taxaOcupacaoMaxima": "60%",
         "coeficienteAproveitamento": {
-            "minimo": "0.05 [cite: 366]",
-            "basico": "1.2 [cite: 367]",
-            "maximo": "1.2 [cite: 369]"
+            "minimo": "0.05",
+            "basico": "1.2",
+            "maximo": "1.2"
         },
-        "alturaMaxima": "8m [cite: 370]",
-        "recuoMinimo": "5m [cite: 372]"
+        "alturaMaxima": "8m",
+        "recuoMinimo": "5m"
     },
     {
         "zone": "ZR3",
         "descricao": "Residencial - Média Densidade",
-        "loteMinimo": "250m² [cite: 561]",
+        "loteMinimo": "250m²",
         "frenteMinima": {
-            "meioQuadra": "10m [cite: 562]",
-            "esquina": "15m [cite: 563]"
+            "meioQuadra": "10m",
+            "esquina": "15m"
         },
-        "taxaOcupacaoMaxima": "65% [cite: 564]",
+        "taxaOcupacaoMaxima": "65%",
         "coeficienteAproveitamento": {
-            "minimo": "0.05 [cite: 565]",
-            "basico": "1.3 [cite: 566]",
-            "maximo": "1.3 [cite: 568]"
+            "minimo": "0.05",
+            "basico": "1.3",
+            "maximo": "1.3"
         },
-        "alturaMaxima": "8m [cite: 569]",
-        "recuoMinimo": "5m [cite: 571]"
+        "alturaMaxima": "8m",
+        "recuoMinimo": "5m"
     },
     {
         "zone": "ZR4",
         "descricao": "Média/Alta Densidade",
         "parametrosBase_RU": {
-            "loteMinimo": "360m² [cite: 781]",
-            "taxaOcupacaoMaxima": "60% [cite: 785]"
+            "loteMinimo": "360m²",
+            "taxaOcupacaoMaxima": "60%"
         },
         "parametrosVerticais_RMV": {
-            "loteMinimo": "360m² [cite: 972]",
+            "loteMinimo": "360m²",
             "frenteMinima": {
-                "meioQuadra": "12m [cite: 973]",
-                "esquina": "17m [cite: 974]"
+                "meioQuadra": "12m",
+                "esquina": "17m"
             },
-            "taxaOcupacaoMaxima": "100% térreo, 60% 1º pav, 50% demais [cite: 975]",
+            "taxaOcupacaoMaxima": "100% térreo, 60% 1º pav, 50% demais",
             "coeficienteAproveitamento": {
-                "minimo": "0.05 [cite: 983]",
-                "basico": "2 [cite: 984]",
-                "maximo": "3.5 [cite: 994]"
+                "minimo": "0.05",
+                "basico": "2",
+                "maximo": "3.5"
             }
         }
     },
@@ -75,58 +75,58 @@
         "zone": "ZR5",
         "descricao": "Alta Densidade (Maior potencial construtivo da cidade)",
         "parametrosBase_RU": {
-            "loteMinimo": "360m² [cite: 1077]",
-            "taxaOcupacaoMaxima": "60% [cite: 1081]"
+            "loteMinimo": "360m²",
+            "taxaOcupacaoMaxima": "60%"
         },
         "parametrosVerticais_RMV": {
-            "loteMinimo": "360m² [cite: 1248]",
+            "loteMinimo": "360m²",
             "frenteMinima": {
-                "meioQuadra": "12m [cite: 1249]",
-                "esquina": "17m [cite: 1250]"
+                "meioQuadra": "12m",
+                "esquina": "17m"
             },
-            "taxaOcupacaoMaxima": "100% térreo, 60% 1º pav, 50% demais [cite: 1251]",
+            "taxaOcupacaoMaxima": "100% térreo, 60% 1º pav, 50% demais",
             "coeficienteAproveitamento": {
-                "minimo": "0.05 [cite: 1258]",
-                "basico": "2 [cite: 1259]",
-                "maximo": "4 "
+                "minimo": "0.05",
+                "basico": "2",
+                "maximo": "4"
             }
         }
     },
     {
         "zone": "ZR6",
         "descricao": "Chácaras Urbanas / Condomínios Horizontais Grandes",
-        "loteMinimo": "2.500m² [cite: 1333]",
+        "loteMinimo": "2.500m²",
         "frenteMinima": {
-            "meioQuadra": "25m [cite: 1335]",
-            "esquina": "30m [cite: 1336]"
+            "meioQuadra": "25m",
+            "esquina": "30m"
         },
-        "taxaOcupacaoMaxima": "30% [cite: 1337]",
+        "taxaOcupacaoMaxima": "30%",
         "coeficienteAproveitamento": {
-            "minimo": "0.05 [cite: 1339]",
-            "basico": "0.05 [cite: 1340]",
-            "maximo": "0.3 [cite: 1342]"
+            "minimo": "0.05",
+            "basico": "0.05",
+            "maximo": "0.3"
         },
-        "alturaMaxima": "9m [cite: 1345]",
-        "recuoMinimo": "5m [cite: 1343]"
+        "alturaMaxima": "9m",
+        "recuoMinimo": "5m"
     },
     {
         "zone": "ZR7",
         "descricao": "Média Densidade com Verticalização Restrita",
         "parametrosBase_RU": {
-            "loteMinimo": "500m² [cite: 1361]",
-            "taxaOcupacaoMaxima": "50% [cite: 1365]"
+            "loteMinimo": "500m²",
+            "taxaOcupacaoMaxima": "50%"
         },
         "parametrosVerticais_RMV": {
-            "loteMinimo": "2.000m² [cite: 1455]",
+            "loteMinimo": "2.000m²",
             "frenteMinima": {
-                "meioQuadra": "25m [cite: 1456]",
-                "esquina": "30m [cite: 1457]"
+                "meioQuadra": "25m",
+                "esquina": "30m"
             },
-            "taxaOcupacaoMaxima": "80% térreo, 50% demais [cite: 1458]",
+            "taxaOcupacaoMaxima": "80% térreo, 50% demais",
             "coeficienteAproveitamento": {
-                "minimo": "0.05 [cite: 1460]",
-                "basico": "2 [cite: 1461]",
-                "maximo": "3.5 [cite: 1475]"
+                "minimo": "0.05",
+                "basico": "2",
+                "maximo": "3.5"
             }
         }
     },
@@ -134,19 +134,19 @@
         "zone": "ZR8",
         "descricao": "Alta Densidade Vertical (Gleba Palhano / Novos Eixos)",
         "parametrosBase_RU": {
-            "loteMinimo": "360m² [cite: 1539]",
-            "taxaOcupacaoMaxima": "60% [cite: 1542]"
+            "loteMinimo": "360m²",
+            "taxaOcupacaoMaxima": "60%"
         },
         "parametrosVerticais_RMV": {
-            "loteMinimo": "2.000m² [cite: 1726]",
+            "loteMinimo": "2.000m²",
             "frenteMinima": {
-                "geral": "40m [cite: 1727]"
+                "geral": "40m"
             },
-            "taxaOcupacaoMaxima": "100% térreo, 60% 1º pav, 50% demais [cite: 1728]",
+            "taxaOcupacaoMaxima": "100% térreo, 60% 1º pav, 50% demais",
             "coeficienteAproveitamento": {
-                "minimo": "0.05 [cite: 1730]",
-                "basico": "2.0 [cite: 1731]",
-                "maximo": "3.5 [cite: 1743]"
+                "minimo": "0.05",
+                "basico": "2.0",
+                "maximo": "3.5"
             }
         }
     },
@@ -154,249 +154,249 @@
         "zone": "ZR9",
         "descricao": "Alta Densidade Vertical (Gleba Palhano / Novos Eixos)",
         "parametrosBase_RU": {
-            "loteMinimo": "360m² [cite: 24]",
-            "taxaOcupacaoMaxima": "60% [cite: 26]"
+            "loteMinimo": "360m²",
+            "taxaOcupacaoMaxima": "60%"
         },
         "parametrosVerticais_RMV": {
-            "loteMinimo": "2.000m² [cite: 209]",
+            "loteMinimo": "2.000m²",
             "frenteMinima": {
-                "geral": "40m [cite: 210]"
+                "geral": "40m"
             },
-            "taxaOcupacaoMaxima": "100% térreo, 60% 1º pav, 50% demais [cite: 211]",
+            "taxaOcupacaoMaxima": "100% térreo, 60% 1º pav, 50% demais",
             "coeficienteAproveitamento": {
-                "minimo": "0.05 [cite: 213]",
-                "basico": "2.0 [cite: 214]",
-                "maximo": "3.5 [cite: 223]"
+                "minimo": "0.05",
+                "basico": "2.0",
+                "maximo": "3.5"
             }
         }
     },
     {
         "zone": "ZI1",
-        "descricao": "Indústrias leves (IND-D), Comércio e Serviço [cite: 1965, 1966, 1967]",
-        "loteMinimo": "500m² [cite: 1973]",
+        "descricao": "Indústrias leves (IND-D), Comércio e Serviço",
+        "loteMinimo": "500m²",
         "frenteMinima": {
-            "meioQuadra": "15m [cite: 1975]",
-            "esquina": "20m [cite: 1976]"
+            "meioQuadra": "15m",
+            "esquina": "20m"
         },
-        "taxaOcupacaoMaxima": "65% [cite: 1977]",
-        "coeficienteAproveitamentoMaximo": "1.3 [cite: 1978]",
-        "peDireitoMinimo": "3.50m [cite: 1980]",
-        "recuoMinimo": "5m [cite: 1981]"
+        "taxaOcupacaoMaxima": "65%",
+        "coeficienteAproveitamentoMaximo": "1.3",
+        "peDireitoMinimo": "3.50m",
+        "recuoMinimo": "5m"
     },
     {
         "zone": "ZI2",
-        "descricao": "Indústrias de pequeno porte (IND-D e IND-C), Comércio e Serviço [cite: 1904, 1907, 1908]",
-        "loteMinimo": "600m² [cite: 1916]",
+        "descricao": "Indústrias de pequeno porte (IND-D e IND-C), Comércio e Serviço",
+        "loteMinimo": "600m²",
         "frenteMinima": {
-            "meioQuadra": "15m [cite: 1918]",
-            "esquina": "20m [cite: 1919]"
+            "meioQuadra": "15m",
+            "esquina": "20m"
         },
-        "taxaOcupacaoMaxima": "80% [cite: 1920]",
-        "coeficienteAproveitamentoMaximo": "1.6 [cite: 1921]",
-        "peDireitoMinimo": "4.00m [cite: 1924]",
-        "recuoMinimo": "5m [cite: 1925]"
+        "taxaOcupacaoMaxima": "80%",
+        "coeficienteAproveitamentoMaximo": "1.6",
+        "peDireitoMinimo": "4.00m",
+        "recuoMinimo": "5m"
     },
     {
         "zone": "ZI3",
-        "descricao": "Indústrias de pequeno e médio porte (IND-D, IND-C e IND-B), Comércio e Serviço [cite: 1845, 1847, 1848, 1849]",
-        "loteMinimo": "1.000m² [cite: 1852]",
+        "descricao": "Indústrias de pequeno e médio porte (IND-D, IND-C e IND-B), Comércio e Serviço",
+        "loteMinimo": "1.000m²",
         "frenteMinima": {
-            "meioQuadra": "20m [cite: 1854]",
-            "esquina": "25m [cite: 1855]"
+            "meioQuadra": "20m",
+            "esquina": "25m"
         },
-        "taxaOcupacaoMaxima": "70% [cite: 1856]",
-        "coeficienteAproveitamentoMaximo": "1 [cite: 1857]",
-        "peDireitoMinimo": "6.00m [cite: 1859]",
-        "recuoMinimo": "5m [cite: 1860]"
+        "taxaOcupacaoMaxima": "70%",
+        "coeficienteAproveitamentoMaximo": "1",
+        "peDireitoMinimo": "6.00m",
+        "recuoMinimo": "5m"
     },
     {
         "zone": "ZI4",
-        "descricao": "Indústria Pesada (IND-D a IND-A), Comércio e Serviço [cite: 1790, 1791, 1792, 1793]",
-        "loteMinimo": "3.500m², 5.000m² ou 10.000m² (dependendo da porcentagem da área do loteamento) [cite: 1796]",
+        "descricao": "Indústria Pesada (IND-D a IND-A), Comércio e Serviço",
+        "loteMinimo": "3.500m², 5.000m² ou 10.000m² (dependendo da porcentagem da área do loteamento)",
         "frenteMinima": {
-            "geral": "50m [cite: 1797]"
+            "geral": "50m"
         },
-        "taxaOcupacaoMaxima": "65% [cite: 1798]",
-        "coeficienteAproveitamentoMaximo": "1 [cite: 1799]",
-        "peDireitoMinimo": "6.00m [cite: 1800]",
-        "recuoMinimo": "10m [cite: 1801]"
+        "taxaOcupacaoMaxima": "65%",
+        "coeficienteAproveitamentoMaximo": "1",
+        "peDireitoMinimo": "6.00m",
+        "recuoMinimo": "10m"
     },
     {
-        "zone": "ZC-1",
+        "zone": "ZC1",
         "descricao": "Zona Central 1 - Foco em comércio, serviço e uso misto",
         "parametrosBase_RU": {
-            "loteMinimo": "500m² [cite: 4861]",
+            "loteMinimo": "500m²",
             "frenteMinima": {
-                "meioQuadra": "15m [cite: 4863]",
-                "esquina": "20m [cite: 4864]"
+                "meioQuadra": "15m",
+                "esquina": "20m"
             },
-            "taxaOcupacaoMaxima": "50% [cite: 4865]",
-            "coeficienteAproveitamentoMaximo": "1 [cite: 4869]",
-            "recuoMinimo": "5m [cite: 4872]"
+            "taxaOcupacaoMaxima": "50%",
+            "coeficienteAproveitamentoMaximo": "1",
+            "recuoMinimo": "5m"
         },
         "parametros_Comercio_Servico_Misto_RMV": {
-            "loteMinimo": "500m² [cite: 4906]",
+            "loteMinimo": "500m²",
             "frenteMinima": {
-                "meioQuadra": "15m [cite: 4910]",
-                "esquina": "20m [cite: 4911]"
+                "meioQuadra": "15m",
+                "esquina": "20m"
             },
-            "taxaOcupacaoMaxima": "100% no térreo e nos dois primeiros pavimentos, 50% nos demais [cite: 4912, 4913]",
+            "taxaOcupacaoMaxima": "100% no térreo e nos dois primeiros pavimentos, 50% nos demais",
             "coeficienteAproveitamento": {
-                "basico": "2 [cite: 4928]",
-                "maximo": "3 [cite: 4942]"
+                "basico": "2",
+                "maximo": "3"
             },
-            "recuoMinimo": "5m [cite: 4949]"
+            "recuoMinimo": "5m"
         }
     },
     {
-        "zone": "ZC-2",
+        "zone": "ZC2",
         "descricao": "Zona Central 2 - Altíssima Densidade",
         "parametrosBase_RU": {
-            "loteMinimo": "500m² [cite: 5010]",
+            "loteMinimo": "500m²",
             "frenteMinima": {
-                "meioQuadra": "15m [cite: 5012]",
-                "esquina": "20m [cite: 5013]"
+                "meioQuadra": "15m",
+                "esquina": "20m"
             },
-            "taxaOcupacaoMaxima": "50% [cite: 5014]",
-            "coeficienteAproveitamentoMaximo": "1 [cite: 5019]",
-            "recuoMinimo": "5m [cite: 5022]"
+            "taxaOcupacaoMaxima": "50%",
+            "coeficienteAproveitamentoMaximo": "1",
+            "recuoMinimo": "5m"
         },
         "parametros_Comercio_Servico_Misto_RMV": {
-            "loteMinimo": "500m² [cite: 5056]",
+            "loteMinimo": "500m²",
             "frenteMinima": {
-                "meioQuadra": "15m [cite: 5060]",
-                "esquina": "20m [cite: 5061]"
+                "meioQuadra": "15m",
+                "esquina": "20m"
             },
-            "taxaOcupacaoMaxima": "100% no térreo e no primeiro pavimento, 50% nos demais [cite: 5062]",
+            "taxaOcupacaoMaxima": "100% no térreo e no primeiro pavimento, 50% nos demais",
             "coeficienteAproveitamento": {
-                "basico": "2 [cite: 5079]",
-                "maximo": "5 "
+                "basico": "2",
+                "maximo": "5"
             },
-            "recuoMinimo": "5m [cite: 5098]"
+            "recuoMinimo": "5m"
         }
     },
     {
-        "zone": "ZC-3",
+        "zone": "ZC3",
         "descricao": "Corredores e Eixos Comerciais - Alta Densidade",
         "parametrosBase_RU": {
-            "loteMinimo": "500m² [cite: 5163]",
+            "loteMinimo": "500m²",
             "frenteMinima": {
-                "meioQuadra": "15m [cite: 5165]",
-                "esquina": "20m [cite: 5166]"
+                "meioQuadra": "15m",
+                "esquina": "20m"
             },
-            "taxaOcupacaoMaxima": "50% [cite: 5167]",
-            "coeficienteAproveitamentoMaximo": "1 [cite: 5172]",
-            "recuoMinimo": "5m [cite: 5175]"
+            "taxaOcupacaoMaxima": "50%",
+            "coeficienteAproveitamentoMaximo": "1",
+            "recuoMinimo": "5m"
         },
         "parametros_Comercio_Servico_Misto_RMV": {
-            "loteMinimo": "500m² [cite: 5210]",
+            "loteMinimo": "500m²",
             "frenteMinima": {
-                "meioQuadra": "15m [cite: 5211]",
-                "esquina": "20m [cite: 5212]"
+                "meioQuadra": "15m",
+                "esquina": "20m"
             },
-            "taxaOcupacaoMaxima": "100% no térreo, 80% no primeiro pavimento e 50% para os demais [cite: 5216]",
+            "taxaOcupacaoMaxima": "100% no térreo, 80% no primeiro pavimento e 50% para os demais",
             "coeficienteAproveitamento": {
-                "basico": "2 [cite: 5219]",
-                "maximo": "4.5 [cite: 5228]"
+                "basico": "2",
+                "maximo": "4.5"
             },
-            "recuoMinimo": "5m [cite: 5233]"
+            "recuoMinimo": "5m"
         }
     },
     {
-        "zone": "ZC-4",
+        "zone": "ZC4",
         "descricao": "Comércio de Bairro / Média Alta Densidade",
         "parametrosBase_RU": {
-            "loteMinimo": "360m² [cite: 5293]",
+            "loteMinimo": "360m²",
             "frenteMinima": {
-                "meioQuadra": "12m [cite: 5295]",
-                "esquina": "17m [cite: 5296]"
+                "meioQuadra": "12m",
+                "esquina": "17m"
             },
-            "taxaOcupacaoMaxima": "60% [cite: 5297]",
-            "coeficienteAproveitamentoMaximo": "1.2 [cite: 5302]",
-            "recuoMinimo": "5m [cite: 5305]"
+            "taxaOcupacaoMaxima": "60%",
+            "coeficienteAproveitamentoMaximo": "1.2",
+            "recuoMinimo": "5m"
         },
         "parametros_Comercio_Servico_Misto_RMV": {
-            "loteMinimo": "360m² [cite: 5312]",
+            "loteMinimo": "360m²",
             "frenteMinima": {
-                "meioQuadra": "12m [cite: 5313]",
-                "esquina": "17m [cite: 5314]"
+                "meioQuadra": "12m",
+                "esquina": "17m"
             },
-            "taxaOcupacaoMaxima": "100% no térreo, 80% no primeiro pavimento e 50% nos demais [cite: 5315]",
+            "taxaOcupacaoMaxima": "100% no térreo, 80% no primeiro pavimento e 50% nos demais",
             "coeficienteAproveitamento": {
-                "basico": "2 [cite: 5318]",
-                "maximo": "4 [cite: 5329]"
+                "basico": "2",
+                "maximo": "4"
             },
-            "recuoMinimo": "5m [cite: 5334]"
+            "recuoMinimo": "5m"
         }
     },
     {
-        "zone": "ZC-5",
+        "zone": "ZC5",
         "descricao": "Comércio Pesado / Rodovias (Não permite Residencial Unifamiliar isolado)",
         "parametros_Comercio_Servico_Misto_Ind": {
-            "loteMinimo": "1.000m² [cite: 5390]",
+            "loteMinimo": "1.000m²",
             "frenteMinima": {
-                "meioQuadra": "20m [cite: 5391]",
-                "esquina": "25m [cite: 5392]"
+                "meioQuadra": "20m",
+                "esquina": "25m"
             },
-            "taxaOcupacaoMaxima": "100% no térreo, 80% nos dois primeiros pavimentos e 50% para os demais [cite: 5393]",
+            "taxaOcupacaoMaxima": "100% no térreo, 80% nos dois primeiros pavimentos e 50% para os demais",
             "coeficienteAproveitamento": {
-                "basico": "1.5 [cite: 5396]",
-                "maximo": "2 [cite: 5404]"
+                "basico": "1.5",
+                "maximo": "2"
             },
-            "recuoMinimo": "15m para datas voltadas para as Rodovias BR-369 e PR-445, 5m para os demais casos [cite: 5412, 5413]"
+            "recuoMinimo": "15m para datas voltadas para as Rodovias BR-369 e PR-445, 5m para os demais casos"
         }
     },
     {
-        "zone": "ZC-6",
+        "zone": "ZC6",
         "descricao": "Comércio Local em Eixos / Média Densidade (Limite de Altura)",
         "parametrosBase_RU": {
-            "loteMinimo": "360m² [cite: 5502]",
+            "loteMinimo": "360m²",
             "frenteMinima": {
-                "meioQuadra": "12m [cite: 5504]",
-                "esquina": "17m [cite: 5505]"
+                "meioQuadra": "12m",
+                "esquina": "17m"
             },
-            "taxaOcupacaoMaxima": "60% [cite: 5506]",
-            "coeficienteAproveitamentoMaximo": "1.2 [cite: 5510]",
-            "recuoMinimo": "5m [cite: 5513]"
+            "taxaOcupacaoMaxima": "60%",
+            "coeficienteAproveitamentoMaximo": "1.2",
+            "recuoMinimo": "5m"
         },
         "parametros_Comercio_Servico_Misto_Inst": {
-            "loteMinimo": "360m² [cite: 5522]",
+            "loteMinimo": "360m²",
             "frenteMinima": {
-                "meioQuadra": "12m [cite: 5523]",
-                "esquina": "17m [cite: 5524]"
+                "meioQuadra": "12m",
+                "esquina": "17m"
             },
-            "taxaOcupacaoMaxima": "80% da área livre do térreo e 50% nos demais pavimentos (não ultrapassando 3 pavimentos) [cite: 5525]",
+            "taxaOcupacaoMaxima": "80% da área livre do térreo e 50% nos demais pavimentos (não ultrapassando 3 pavimentos)",
             "coeficienteAproveitamento": {
-                "basico": "2 [cite: 5528]"
+                "basico": "2"
             },
-            "recuoMinimo": "5m [cite: 5530]"
+            "recuoMinimo": "5m"
         }
     },
     {
-        "zone": "ZC-7",
+        "zone": "ZC7",
         "descricao": "Zona Comercial 7",
         "parametrosBase_RU": {
-            "loteMinimo": "500m² [cite: 5576]",
+            "loteMinimo": "500m²",
             "frenteMinima": {
-                "meioQuadra": "15m [cite: 5578]",
-                "esquina": "20m [cite: 5579]"
+                "meioQuadra": "15m",
+                "esquina": "20m"
             },
-            "taxaOcupacaoMaxima": "50% [cite: 5580]",
-            "coeficienteAproveitamentoMaximo": "1 [cite: 5585]",
-            "recuoMinimo": "5m [cite: 5588]"
+            "taxaOcupacaoMaxima": "50%",
+            "coeficienteAproveitamentoMaximo": "1",
+            "recuoMinimo": "5m"
         },
         "parametros_Comercio_Servico_Misto_RMV": {
-            "loteMinimo": "2.000m² [cite: 5595]",
+            "loteMinimo": "2.000m²",
             "frenteMinima": {
-                "meioQuadra": "15m [cite: 5596]",
-                "esquina": "20m [cite: 5597]"
+                "meioQuadra": "15m",
+                "esquina": "20m"
             },
-            "taxaOcupacaoMaxima": "65% no térreo e no primeiro pavimento, 50% nos demais [cite: 5598]",
+            "taxaOcupacaoMaxima": "65% no térreo e no primeiro pavimento, 50% nos demais",
             "coeficienteAproveitamento": {
-                "basico": "2.0 [cite: 5606]",
-                "maximo": "3.5 [cite: 5608]"
+                "basico": "2.0",
+                "maximo": "3.5"
             },
-            "recuoMinimo": "5m [cite: 5612]"
+            "recuoMinimo": "5m"
         }
     }
 ]

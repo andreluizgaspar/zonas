@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import '../styles/Historico.css';
 
-const Historico = ({ usuario }) => {
+const Historico = ({ usuario, onVisualizarConsulta }) => {
     const [historico, setHistorico] = useState([]);
     const [carregando, setCarregando] = useState(false);
     const [erro, setErro] = useState(null);
@@ -54,6 +54,16 @@ const Historico = ({ usuario }) => {
         }
     };
 
+    const visualizarConsulta = (consulta) => {
+        if (onVisualizarConsulta) {
+            onVisualizarConsulta({
+                endereco: consulta.endereco,
+                coordenadas: consulta.coordenadas,
+                resultado: consulta.resultado,
+            });
+        }
+    };
+
     const formatarData = (data) => {
         return new Date(data).toLocaleString('pt-BR');
     };
@@ -67,7 +77,7 @@ const Historico = ({ usuario }) => {
             <div className="historico-header">
                 <h2>📚 Histórico de Consultas</h2>
                 <button className="btn-recarregar" onClick={carregarHistorico}>
-                    🔄 Recarregar
+                    🔄
                 </button>
             </div>
 
@@ -84,7 +94,13 @@ const Historico = ({ usuario }) => {
                             <div className="historico-info">
                                 <h4>{consulta.endereco}</h4>
                                 <p className="zona-tag">Zona: <strong>{consulta.resultado?.zona || 'N/A'}</strong></p>
-                                <p className="data-tag">{formatarData(consulta.createdAt)}</p>
+                                <p clas
+                                    className="btn-ver"
+                                    onClick={() => visualizarConsulta(consulta)}
+                                    title="Ver detalhes da consulta"
+                                >
+                                    👁️ Ver
+                                ta(consulta.createdAt)}</p>
                             </div>
 
                             <div className="historico-coordenadas">

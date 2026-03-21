@@ -13,6 +13,7 @@ function App() {
     const [loginError, setLoginError] = useState('');
     const [registerError, setRegisterError] = useState('');
     const [sidebarOpen, setSidebarOpen] = useState(true);
+    const [consultaVisualizada, setConsultaVisualizada] = useState(null);
 
     useEffect(() => {
         const loggedInUser = localStorage.getItem('user');
@@ -82,6 +83,10 @@ function App() {
         setSidebarOpen(!sidebarOpen);
     };
 
+    const handleVisualizarConsulta = (consulta) => {
+        setConsultaVisualizada(consulta);
+    };
+
     return (
         <div className={`App ${sidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
             {/* Navbar */}
@@ -127,12 +132,12 @@ function App() {
                 <div className="app-layout">
                     {/* Barra Lateral de Histórico */}
                     <aside className={`sidebar ${sidebarOpen ? 'open' : 'closed'}`}>
-                        <Historico usuario={user} />
+                        <Historico usuario={user} onVisualizarConsulta={handleVisualizarConsulta} />
                     </aside>
 
                     {/* Área do Chat */}
                     <main className="main-content">
-                        <Chat usuario={user} />
+                        <Chat usuario={user} consultaVisualizada={consultaVisualizada} />
                     </main>
                 </div>
             ) : isRegistering ? (
