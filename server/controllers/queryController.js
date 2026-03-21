@@ -2,6 +2,7 @@ import asyncHandler from 'express-async-handler';
 import ProcessadorEndereco from '../services/ProcessadorEndereco.js';
 import ApiArcGIS from '../services/ApiArcGIS.js';
 import DatabaseService from '../services/DatabaseService.js';
+import OpenAIService from '../services/OpenAIService.js';
 import Consulta from '../models/Consulta.js';
 
 const processadorEndereco = new ProcessadorEndereco();
@@ -9,60 +10,92 @@ const apiArcGIS = new ApiArcGIS();
 const databaseService = new DatabaseService();
 
 const query = asyncHandler(async (req, res) => {
-    const { query } = req.body;
+    const { query: userQuery } = req.body;
 
-    console.log('query')
-    console.log(query)
-
-    if (!query) {
+    if (!userQuery) {
         res.status(400).json({ error: 'Address query is required.' });
         return;
     }
 
     try {
-        const coordenadas = await processadorEndereco.converterEnderecoParaCoordenadas(query);
-
-        console.log('coordenadas')
-        console.log(coordenadas)
-
-        const zona = await apiArcGIS.consultarZoneamento(coordenadas.latitude, coordenadas.longitude);
-
-        console.log('zona')
-        console.log(zona)
-
-        if (!zona) {
-            res.status(404).json({ error: 'Could not find zone for the given address.' });
+        // 1. Usar OpenAI para extrair o endereço limpo ou entender intenção
+        let enderecoLimpo;
+        try {
+            enderecoLimpo = await OpenAIService.extrairEndereco(userQuery);
+            console.log(`Endereço extraído: ${enderecoLimpo}`);
+        } catch (extractError) {
+            res.status(400).json({ error: extractError.message });
             return;
         }
 
-        const zoneInfo = await databaseService.getZoneInfo(zona);
+        // 2. Converter endereço para coordenadas
+        let coordenadas;
+        try {
+            coordenadas = await processadorEndereco.converterEnderecoParaCoordenadas(enderecoLimpo);
+        } catch (geocodeError) {
+            res.status(404).json({ error: geocodeError.message });
+            return;
+        }
+        console.log('Coordenadas obtidas:', coordenadas);
+
+        if (!coordenadas || !coordenadas.latitude) {
+            res.status(404).json({ error: 'Não foi possível encontrar a localização para este endereço.' });
+            return;
+        }
+
+        // 3. Consultar Zoneamento no ArcGIS usando coordenadas
+        const zonaNome = await apiArcGIS.consultarZoneamento(coordenadas.latitude, coordenadas.longitude);
+        console.log(`Zona identificada: ${zonaNome}`);
+
+        if (!zonaNome) {
+            res.status(404).json({ error: 'Não encontramos zoneamento para este local em Londrina.' });
+            return;
+        }
+
+        // 4. Buscar informações detalhadas da zona no banco/JSON
+        const zoneInfo = await databaseService.getZoneInfo(zonaNome);
 
         if (!zoneInfo) {
-            res.status(404).json({ error: 'Zone information not found in the database.' });
+            res.status(404).json({ error: `Informações técnicas para a zona ${zonaNome} não encontradas no sistema.` });
             return;
         }
 
+        // 5. Gerar explicação amigável com OpenAI baseada nos dados técnicos
+        const explicacaoIA = await OpenAIService.gerarExplicacaoZoneamento(zonaNome, zoneInfo, enderecoLimpo);
+
+        // 6. Salvar a consulta no histórico
         const consulta = new Consulta({
             usuario: req.user._id,
-            endereco: query,
+            endereco: enderecoLimpo,
             coordenadas: coordenadas,
             resultado: {
                 zona: zoneInfo.zone,
-                categoria: zoneInfo.unidadeHabitacionalCada,
-                hierarquia: zoneInfo.frenteMinimaLarguraMedia.meioQuadra,
-                caracteristicas: zoneInfo.taxaOcupacaoMaxima,
-                acessoLei: zoneInfo.coeficienteAproveitamentoMaximo,
+                unidadeHabitacional: zoneInfo.unidadeHabitacionalCada,
+                frenteMinima: zoneInfo.frenteMinimaLarguraMedia?.meioQuadra,
+                taxaOcupacao: zoneInfo.taxaOcupacaoMaxima,
+                coeficienteAproveitamento: zoneInfo.coeficienteAproveitamentoMaximo,
+                alturaMaxima: zoneInfo.alturaMaxima,
+                recuoMinimo: zoneInfo.recuoMinimo,
+                resumo: explicacaoIA
             },
         });
 
         await consulta.save();
 
-        const resumo = consulta.resultado.gerarResumo();
-
-        res.status(200).json({ ...zoneInfo, resumo });
+        // 7. Retornar resposta rica para o frontend
+        res.status(200).json({
+            ...zoneInfo,
+            resumo: explicacaoIA,
+            endereco: enderecoLimpo,
+            coordenadas: coordenadas
+        });
     } catch (error) {
-        console.error('Error processing query:', error);
-        res.status(500).json({ error: 'An internal server error occurred.' });
+        console.error('Error processing query:', error.message || error);
+        console.error('Stack:', error.stack);
+        res.status(500).json({
+            error: 'Ocorreu um erro ao processar sua consulta com inteligência artificial.',
+            details: process.env.NODE_ENV === 'development' ? error.message : undefined
+        });
     }
 });
 
@@ -81,7 +114,6 @@ const deleteQuery = asyncHandler(async (req, res) => {
         throw new Error('Consulta não encontrada');
     }
 
-    // Verificar se o usuário é o dono da consulta
     if (consulta.usuario.toString() !== req.user._id.toString()) {
         res.status(401);
         throw new Error('Não autorizado a deletar esta consulta');

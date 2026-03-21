@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Chat from './components/Chat';
+import Historico from './components/Historico';
 import './App.css';
 
 function App() {
@@ -9,9 +10,9 @@ function App() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isRegistering, setIsRegistering] = useState(false);
-    const [activeTab, setActiveTab] = useState('consulta');
     const [loginError, setLoginError] = useState('');
     const [registerError, setRegisterError] = useState('');
+    const [sidebarOpen, setSidebarOpen] = useState(true);
 
     useEffect(() => {
         const loggedInUser = localStorage.getItem('user');
@@ -75,20 +76,44 @@ function App() {
         setName('');
         setEmail('');
         setPassword('');
-        setActiveTab('consulta');
+    };
+
+    const toggleSidebar = () => {
+        setSidebarOpen(!sidebarOpen);
     };
 
     return (
-        <div className="App">
+        <div className={`App ${sidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
             {/* Navbar */}
             <header className="App-header">
                 <div className="navbar-container">
-                    <div className="navbar-brand">
-                        <h1>🗺️ Zonas - Consulta de Zoneamento</h1>
+                    <div className="navbar-left">
+                        {user && (
+                            <button className="btn-toggle-sidebar" onClick={toggleSidebar}>
+                                {sidebarOpen ? (
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M15 18H9V8h6m2-2H7c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z" />
+                                    </svg>
+                                ) : (
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-6-4h-2v-2h2v2zm0-4h-2V7h2v4z" />
+                                    </svg>
+                                )}
+                            </button>
+                        )}
+                        <div className="navbar-brand">
+                            <h1>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ display: 'inline', marginRight: '8px', verticalAlign: 'middle' }}>
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                                    <circle cx="12" cy="10" r="3" />
+                                </svg>
+                                Zonas <span>Urbana</span>
+                            </h1>
+                        </div>
                     </div>
                     {user && (
                         <div className="navbar-user">
-                            <span className="user-name">Olá, {user.name}!</span>
+                            <span className="user-name">Olá, {user.name.split(' ')[0]}</span>
                             <button className="btn-logout" onClick={handleLogout}>
                                 Sair
                             </button>
@@ -99,62 +124,62 @@ function App() {
 
             {/* Conteúdo Principal */}
             {user ? (
-                <div className="app-container">
-                    {/* Abas de Navegação */}
-                    <nav className="app-nav">
-                        <button
-                            className={`nav-item ${activeTab === 'consulta' ? 'active' : ''}`}
-                            onClick={() => setActiveTab('consulta')}
-                        >
-                            🔍 Nova Consulta
-                        </button>
-                        <button
-                            className={`nav-item ${activeTab === 'historico' ? 'active' : ''}`}
-                            onClick={() => setActiveTab('historico')}
-                        >
-                            📚 Histórico
-                        </button>
-                    </nav>
+                <div className="app-layout">
+                    {/* Barra Lateral de Histórico */}
+                    <aside className={`sidebar ${sidebarOpen ? 'open' : 'closed'}`}>
+                        <Historico usuario={user} />
+                    </aside>
 
-                    {/* Conteúdo das Abas */}
-                    <main className="app-content">
-                        {activeTab === 'consulta' && <Chat usuario={user} />}
-                        {activeTab === 'historico' && <Chat usuario={user} showHistorico={true} />}
+                    {/* Área do Chat */}
+                    <main className="main-content">
+                        <Chat usuario={user} />
                     </main>
                 </div>
             ) : isRegistering ? (
                 <div className="auth-container">
                     <div className="auth-form-card">
-                        <h2>Criar Nova Conta</h2>
+                        <div className="auth-header">
+                            <h2>Criar Conta</h2>
+                            <p>Junte-se ao futuro do zoneamento urbano</p>
+                        </div>
                         {registerError && <div className="error-message">{registerError}</div>}
                         <form onSubmit={handleRegister}>
-                            <input
-                                type="text"
-                                placeholder="Seu nome completo"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                                required
-                            />
-                            <input
-                                type="email"
-                                placeholder="seu@email.com"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                required
-                            />
-                            <input
-                                type="password"
-                                placeholder="Senha (mín. 6 caracteres)"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                required
-                            />
+                            <div className="input-group">
+                                <label>Nome</label>
+                                <input
+                                    type="text"
+                                    placeholder="Seu nome completo"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                    required
+                                />
+                            </div>
+                            <div className="input-group">
+                                <label>Email</label>
+                                <input
+                                    type="email"
+                                    placeholder="seu@email.com"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    required
+                                />
+                            </div>
+                            <div className="input-group">
+                                <label>Senha</label>
+                                <input
+                                    type="password"
+                                    placeholder="Mínimo 6 caracteres"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    required
+                                />
+                            </div>
                             <button type="submit" className="btn-primary">
-                                Registrar
+                                Começar Agora
                             </button>
                         </form>
                         <p className="auth-switch">
-                            Já tem conta?{' '}
+                            Já possui uma conta?{' '}
                             <button
                                 type="button"
                                 className="link-button"
@@ -163,7 +188,7 @@ function App() {
                                     setRegisterError('');
                                 }}
                             >
-                                Faça login
+                                Entrar
                             </button>
                         </p>
                     </div>
@@ -171,29 +196,38 @@ function App() {
             ) : (
                 <div className="auth-container">
                     <div className="auth-form-card">
-                        <h2>Entrar</h2>
+                        <div className="auth-header">
+                            <h2>Bem-vindo</h2>
+                            <p>Acesse o painel de zoneamento inteligente</p>
+                        </div>
                         {loginError && <div className="error-message">{loginError}</div>}
                         <form onSubmit={handleLogin}>
-                            <input
-                                type="email"
-                                placeholder="seu@email.com"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                required
-                            />
-                            <input
-                                type="password"
-                                placeholder="Sua senha"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                required
-                            />
+                            <div className="input-group">
+                                <label>Email</label>
+                                <input
+                                    type="email"
+                                    placeholder="seu@email.com"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    required
+                                />
+                            </div>
+                            <div className="input-group">
+                                <label>Senha</label>
+                                <input
+                                    type="password"
+                                    placeholder="Sua senha"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    required
+                                />
+                            </div>
                             <button type="submit" className="btn-primary">
-                                Entrar
+                                Acessar Sistema
                             </button>
                         </form>
                         <p className="auth-switch">
-                            Não tem conta?{' '}
+                            Ainda não tem conta?{' '}
                             <button
                                 type="button"
                                 className="link-button"
@@ -202,7 +236,7 @@ function App() {
                                     setLoginError('');
                                 }}
                             >
-                                Registre-se agora
+                                Criar conta gratuita
                             </button>
                         </p>
                     </div>

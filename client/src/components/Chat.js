@@ -1,9 +1,38 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
 import ResultadoZoneamento from './ResultadoZoneamento';
 import MapaZona from './MapaZona';
 import Historico from './Historico';
 import '../styles/Chat.css';
+
+// SVG Icons
+const IconSend = () => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+    </svg>
+);
+
+const IconLoading = () => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="spin">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M12 6v6l4 2" />
+    </svg>
+);
+
+const IconCheck = () => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <polyline points="20 6 9 17 4 12" />
+    </svg>
+);
+
+const IconAlert = () => (
+    <svg viewBox="0 0 24 24" fill="currentColor">
+        <circle cx="12" cy="19" r="1" />
+        <path d="M12 2L2 20h20L12 2z" />
+    </svg>
+);
 
 const Chat = ({ usuario, showHistorico = false }) => {
     const [messages, setMessages] = useState([]);
@@ -40,8 +69,9 @@ const Chat = ({ usuario, showHistorico = false }) => {
             setUltimasCoordenadas(data.coordenadas);
 
             const botMessage = {
-                text: `✅ Consulta processada com sucesso! Zona: ${data.zona || 'N/A'}`,
+                text: data.resumo || `Consulta processada! Zona: ${data.zone || 'N/A'}`,
                 sender: 'bot',
+                type: 'success'
             };
             setMessages([...newMessages, botMessage]);
         } catch (error) {
@@ -49,8 +79,9 @@ const Chat = ({ usuario, showHistorico = false }) => {
                 error.response?.data?.error ||
                 'Não foi possível processar a consulta. Verifique o endereço.';
             const errorMessage = {
-                text: `❌ Erro: ${errorMsg}`,
+                text: errorMsg,
                 sender: 'bot',
+                type: 'error'
             };
             setMessages([...newMessages, errorMessage]);
             console.error('Erro:', error);
@@ -70,18 +101,50 @@ const Chat = ({ usuario, showHistorico = false }) => {
                 <div className="messages">
                     {messages.length === 0 ? (
                         <div className="empty-state">
-                            <h3>👋 Bem-vindo!</h3>
-                            <p>Digite um endereço para consultar o zoneamento.</p>
-                            <p className="example">Exemplo: "Avenida Brasil, 1000, Londrina"</p>
+                            <div className="empty-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                                    <circle cx="12" cy="10" r="3" />
+                                </svg>
+                            </div>
+                            <h3>Bem-vindo ao Consultor de Zoneamento</h3>
+                            <p>Digite um endereço para consultar a regulamentação urbanística.</p>
+                            <p className="example">Exemplo: "Avenida Brasil, 1000"</p>
                         </div>
                     ) : (
                         messages.map((msg, index) => (
-                            <div key={index} className={`message ${msg.sender}`}>
-                                <div className="message-content">{msg.text}</div>
+                            <div key={index} className={`message message-${msg.sender} ${msg.type ? `message-${msg.type}` : ''}`}>
+                                <div className="message-icon">
+                                    {msg.sender === 'user' ? (
+                                        <svg viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                                        </svg>
+                                    ) : msg.type === 'error' ? (
+                                        <IconAlert />
+                                    ) : (
+                                        <IconCheck />
+                                    )}
+                                </div>
+                                <div className="message-content">
+                                    {msg.sender === 'user' ? (
+                                        msg.text
+                                    ) : (
+                                        <ReactMarkdown rehypePlugins={[rehypeRaw]} className="markdown-content">
+                                            {msg.text}
+                                        </ReactMarkdown>
+                                    )}
+                                </div>
                             </div>
                         ))
                     )}
-                    {carregando && <div className="loading-indicator">⏳ Processando...</div>}
+                    {carregando && (
+                        <div className="loading-indicator">
+                            <div className="loading-icon">
+                                <IconLoading />
+                            </div>
+                            <span>Processando endereço...</span>
+                        </div>
+                    )}
                 </div>
                 <div className="input-area">
                     <input
@@ -89,11 +152,16 @@ const Chat = ({ usuario, showHistorico = false }) => {
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
                         onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
-                        placeholder="Digite um endereço (ex: Avenida Brasil, 1000)..."
+                        placeholder="Digite um endereço de Londrina..."
                         disabled={carregando}
                     />
-                    <button onClick={sendMessage} disabled={carregando} className="send-button">
-                        {carregando ? '⏳' : '📤'}
+                    <button
+                        onClick={sendMessage}
+                        disabled={carregando}
+                        className="send-button"
+                        title={carregando ? 'Processando...' : 'Enviar consulta'}
+                    >
+                        {carregando ? <IconLoading /> : <IconSend />}
                     </button>
                 </div>
             </div>
@@ -114,7 +182,7 @@ const Chat = ({ usuario, showHistorico = false }) => {
                                 coordenadas={ultimasCoordenadas}
                                 endereco={ultimoResultado.endereco || 'Consulta realizada'}
                                 onSalvar={() => {
-                                    alert('✅ Consulta armazenada no histórico!');
+                                    alert('Consulta armazenada no histórico!');
                                 }}
                             />
                         </div>

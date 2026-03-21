@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import '../styles/Historico.css';
 
@@ -7,11 +7,7 @@ const Historico = ({ usuario }) => {
     const [carregando, setCarregando] = useState(false);
     const [erro, setErro] = useState(null);
 
-    useEffect(() => {
-        carregarHistorico();
-    }, [usuario]);
-
-    const carregarHistorico = async () => {
+    const carregarHistorico = useCallback(async () => {
         if (!usuario) return;
 
         setCarregando(true);
@@ -34,7 +30,11 @@ const Historico = ({ usuario }) => {
         } finally {
             setCarregando(false);
         }
-    };
+    }, [usuario]);
+
+    useEffect(() => {
+        carregarHistorico();
+    }, [carregarHistorico]);
 
     const deletarConsulta = async (consultaId) => {
         try {

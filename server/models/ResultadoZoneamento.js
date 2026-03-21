@@ -8,11 +8,14 @@ const resultadoZoneamentoSchema = mongoose.Schema({
   hierarquia: { type: String },
   caracteristicas: { type: String },
   acessoLei: { type: String },
+  resumo: { type: String },
   recuos: recuosSchema,
   parametrosUrbanisticos: parametrosUrbanisticosSchema,
 });
 
 resultadoZoneamentoSchema.methods.gerarResumo = function () {
+  if (this.resumo) return this.resumo;
+  
   return `
     Zona: ${this.zona}
     Categoria: ${this.categoria}

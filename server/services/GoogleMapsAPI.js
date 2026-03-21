@@ -8,9 +8,15 @@ class GoogleMapsAPI {
 
     async geocode(address) {
         try {
+            // Adicionar contexto de localização se não tiver
+            let searchAddress = address;
+            if (!address.toLowerCase().includes('londrina')) {
+                searchAddress = `${address}, Londrina, Paraná, Brasil`;
+            }
+
             const response = await this.client.geocode({
                 params: {
-                    address: address,
+                    address: searchAddress,
                     key: process.env.GOOGLE_MAPS_API_KEY,
                 },
                 timeout: 1000,
@@ -23,7 +29,7 @@ class GoogleMapsAPI {
                     longitude: coords.lng,
                 };
             } else {
-                throw new Error('Nenhum resultado (endereco errado, etc)');
+                throw new Error(`Nenhum resultado encontrado para "${address}" em Londrina. Verifique o nome do endereço e tente novamente.`);
             }
         } catch (error) {
             console.error('Erro endereco geocode:', error.message);

@@ -1,75 +1,115 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '../styles/MapaZona.css';
 
-// Componente de mapa simples usando Leaflet
-// Você pode instalar com: npm install leaflet
 const MapaZona = ({ coordenadas, endereco }) => {
     const mapContainer = useRef(null);
     const map = useRef(null);
+    const [leafletLoaded, setLeafletLoaded] = useState(false);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
-        if (!coordenadas || !mapContainer.current) return;
-
-        // Verificar se Leaflet está disponível
-        if (typeof window.L === 'undefined') {
-            console.warn('Leaflet não está carregado. Instale com: npm install leaflet');
-            // Fallback: exibir coordenadas em texto
-            if (mapContainer.current) {
-                mapContainer.current.innerHTML = `
-          <div class="mapa-fallback">
-            <p>📍 ${endereco}</p>
-            <p>Latitude: ${coordenadas.latitude.toFixed(6)}</p>
-            <p>Longitude: ${coordenadas.longitude.toFixed(6)}</p>
-            <p style="font-size: 12px; color: #999; margin-top: 10px;">
-              (Para ver o mapa no navegador, instale Leaflet: npm install leaflet)
-            </p>
-          </div>
-        `;
-            }
-            return;
+        // Carregar Leaflet CSS se não estiver carregado
+        if (!document.getElementById('leaflet-css')) {
+            const link = document.createElement('link');
+            link.id = 'leaflet-css';
+            link.rel = 'stylesheet';
+            link.href = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css';
+            document.head.appendChild(link);
         }
+
+        // Carregar Leaflet JS se não estiver carregado
+        if (!window.L) {
+            const script = document.createElement('script');
+            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';
+            script.onload = () => {
+                setLeafletLoaded(true);
+            };
+            script.onerror = () => {
+                setError('Erro ao carregar o mapa. Tente recarregar a página.');
+            };
+            document.head.appendChild(script);
+        } else {
+            setLeafletLoaded(true);
+        }
+    }, []);
+
+    useEffect(() => {
+        if (!leafletLoaded || !coordenadas || !mapContainer.current) return;
 
         const L = window.L;
 
-        // Criar mapa
-        if (!map.current) {
-            map.current = L.map(mapContainer.current).setView(
-                [coordenadas.latitude, coordenadas.longitude],
-                15
-            );
+        try {
+            // Criar mapa
+            if (!map.current) {
+                map.current = L.map(mapContainer.current).setView(
+                    [coordenadas.latitude, coordenadas.longitude],
+                    15
+                );
 
-            // Adicionar tile layer (OpenStreetMap)
-            L.tileLayer(
-                'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                {
-                    attribution:
-                        '© OpenStreetMap contributors',
-                    maxZoom: 19,
-                }
-            ).addTo(map.current);
+                // Adicionar tile layer (OpenStreetMap)
+                L.tileLayer(
+                    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                    {
+                        attribution: '© OpenStreetMap contributors',
+                        maxZoom: 19,
+                    }
+                ).addTo(map.current);
 
-            // Adicionar marcador
-            L.marker([coordenadas.latitude, coordenadas.longitude])
-                .addTo(map.current)
-                .bindPopup(`
-          <div class="popup-content">
-            <strong>${endereco}</strong><br/>
-            ${coordenadas.latitude.toFixed(6)}, ${coordenadas.longitude.toFixed(6)}
-          </div>
-        `)
-                .openPopup();
-        } else {
-            // Atualizar mapa existente
-            map.current.setView([coordenadas.latitude, coordenadas.longitude], 15);
+                // Adicionar marcador
+                L.marker([coordenadas.latitude, coordenadas.longitude])
+                    .addTo(map.current)
+                    .bindPopup(`
+                        <div class="popup-content">
+                            <strong>${endereco}</strong><br/>
+                            ${coordenadas.latitude.toFixed(6)}, ${coordenadas.longitude.toFixed(6)}
+                        </div>
+                    `)
+                    .openPopup();
+            } else {
+                // Atualizar mapa existente
+                map.current.setView([coordenadas.latitude, coordenadas.longitude], 15);
+                // Remover marcadores antigos
+                map.current.eachLayer((layer) => {
+                    if (layer instanceof L.Marker) {
+                        map.current.removeLayer(layer);
+                    }
+                });
+                // Adicionar novo marcador
+                L.marker([coordenadas.latitude, coordenadas.longitude])
+                    .addTo(map.current)
+                    .bindPopup(`
+                        <div class="popup-content">
+                            <strong>${endereco}</strong><br/>
+                            ${coordenadas.latitude.toFixed(6)}, ${coordenadas.longitude.toFixed(6)}
+                        </div>
+                    `)
+                    .openPopup();
+            }
+        } catch (err) {
+            console.error('Erro ao renderizar mapa:', err);
+            setError('Erro ao renderizar o mapa.');
         }
-    }, [coordenadas, endereco]);
+    }, [leafletLoaded, coordenadas, endereco]);
 
     return (
         <div className="mapa-container">
             <div className="mapa-header">
-                <h3>🗺️ Localização</h3>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ width: '20px', height: '20px', marginRight: '8px' }}>
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                </svg>
+                Localização
             </div>
-            <div ref={mapContainer} className="mapa-content" />
+            {error ? (
+                <div className="mapa-error">{error}</div>
+            ) : !leafletLoaded ? (
+                <div className="mapa-loading">
+                    <div className="spinner"></div>
+                    <span>Carregando mapa...</span>
+                </div>
+            ) : (
+                <div ref={mapContainer} className="mapa-content" />
+            )}
         </div>
     );
 };
