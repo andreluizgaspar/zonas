@@ -81,7 +81,7 @@ const Chat = ({ usuario, showHistorico = false, consultaVisualizada = null }) =>
             const { data } = await axios.post('/api/query', { query: input }, config);
 
             // Salvar resultado e coordenadas
-            setUltimoResultado(data);
+            setUltimoResultado(data.resultado);
             setUltimasCoordenadas(data.coordenadas);
 
             const botMessage = {

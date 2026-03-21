@@ -84,7 +84,16 @@ const query = asyncHandler(async (req, res) => {
 
         // 7. Retornar resposta rica para o frontend
         res.status(200).json({
-            ...zoneInfo,
+            resultado: {
+                zona: zoneInfo.zone,
+                descricao: zoneInfo.descricao,
+                categoria: zoneInfo.categoria,
+                hierarquia: zoneInfo.hierarquia,
+                caracteristicas: zoneInfo.caracteristicas,
+                acessoLei: zoneInfo.acessoLei,
+                recuos: zoneInfo.recuos,
+                parametrosUrbanisticos: zoneInfo.parametrosUrbanisticos,
+            },
             resumo: explicacaoIA,
             endereco: enderecoLimpo,
             coordenadas: coordenadas
