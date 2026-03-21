@@ -1,0 +1,262 @@
+/* ResultadoZoneamento.css */
+
+.resultado-container {
+    max-width: 900px;
+    margin: 20px auto;
+    border-radius: 12px;
+    background: white;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    animation: slideIn 0.3s ease-in;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.resultado-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.resultado-header h2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.btn-salvar {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.btn-salvar:hover {
+    background-color: #45a049;
+}
+
+.resultado-content {
+    padding: 30px;
+}
+
+.secao {
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.secao:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.secao h3 {
+    color: #667eea;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.secao.destaque {
+    background: #f5f5f5;
+    padding: 20px;
+    border-radius: 8px;
+    border: 2px solid #667eea;
+    border-bottom: 2px solid #667eea;
+    margin-bottom: 25px;
+}
+
+/* Grid Layout */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    background: #f9f9f9;
+    border-radius: 6px;
+}
+
+.info-item .label {
+    font-weight: 600;
+    color: #666;
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.info-item .valor {
+    color: #333;
+    font-size: 14px;
+    word-break: break-word;
+}
+
+/* Zona Display */
+.zona-display {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.zona-badge {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px 30px;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.zona-info h4 {
+    margin: 0 0 10px 0;
+    color: #333;
+}
+
+.zona-info p {
+    margin: 5px 0;
+    color: #666;
+    font-size: 14px;
+}
+
+/* Recuos Grid */
+.recuos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 15px;
+}
+
+.recuo-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
+}
+
+.recuo-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    opacity: 0.9;
+}
+
+.recuo-valor {
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Parâmetros Grid */
+.parametros-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+}
+
+.parametro-card {
+    background: #f0f4ff;
+    border-left: 4px solid #667eea;
+    padding: 15px;
+    border-radius: 6px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.parametro-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+}
+
+.parametro-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: #666;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.parametro-valor {
+    display: block;
+    font-size: 20px;
+    font-weight: bold;
+    color: #667eea;
+}
+
+/* Características e Lei */
+.caracteristicas-text,
+.lei-text {
+    color: #555;
+    line-height: 1.6;
+    font-size: 14px;
+    padding: 10px;
+    background: #f9f9f9;
+    border-radius: 6px;
+    border-left: 4px solid #667eea;
+}
+
+.info-box {
+    background: #f0f4ff;
+    border: 1px solid #667eea;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .resultado-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .resultado-content {
+        padding: 15px;
+    }
+
+    .zona-display {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .zona-info {
+        text-align: center;
+    }
+
+    .info-grid,
+    .recuos-grid,
+    .parametros-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -71,4 +71,25 @@ const getQueryHistory = asyncHandler(async (req, res) => {
     res.status(200).json(history);
 });
 
-export { query, getQueryHistory };
+const deleteQuery = asyncHandler(async (req, res) => {
+    const { id } = req.params;
+
+    const consulta = await Consulta.findById(id);
+
+    if (!consulta) {
+        res.status(404);
+        throw new Error('Consulta não encontrada');
+    }
+
+    // Verificar se o usuário é o dono da consulta
+    if (consulta.usuario.toString() !== req.user._id.toString()) {
+        res.status(401);
+        throw new Error('Não autorizado a deletar esta consulta');
+    }
+
+    await Consulta.findByIdAndDelete(id);
+
+    res.status(200).json({ message: 'Consulta deletada com sucesso' });
+});
+
+export { query, getQueryHistory, deleteQuery };
