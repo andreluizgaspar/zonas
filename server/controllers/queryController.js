@@ -18,7 +18,6 @@ const query = asyncHandler(async (req, res) => {
     }
 
     try {
-        // 1. Usar OpenAI para extrair o endereço limpo ou entender intenção
         let enderecoLimpo;
         try {
             enderecoLimpo = await OpenAIService.extrairEndereco(userQuery);
@@ -28,7 +27,6 @@ const query = asyncHandler(async (req, res) => {
             return;
         }
 
-        // 2. Converter endereço para coordenadas
         let coordenadas;
         try {
             coordenadas = await processadorEndereco.converterEnderecoParaCoordenadas(enderecoLimpo);
@@ -43,7 +41,6 @@ const query = asyncHandler(async (req, res) => {
             return;
         }
 
-        // 3. Consultar Zoneamento no ArcGIS usando coordenadas
         const zonaNome = await apiArcGIS.consultarZoneamento(coordenadas.latitude, coordenadas.longitude);
         console.log(`Zona identificada: ${zonaNome}`);
 
@@ -52,7 +49,6 @@ const query = asyncHandler(async (req, res) => {
             return;
         }
 
-        // 4. Buscar informações detalhadas da zona no banco/JSON
         const zoneInfo = await databaseService.getZoneInfo(zonaNome);
 
         if (!zoneInfo) {
@@ -60,10 +56,8 @@ const query = asyncHandler(async (req, res) => {
             return;
         }
 
-        // 5. Gerar explicação amigável com OpenAI baseada nos dados técnicos
         const explicacaoIA = await OpenAIService.gerarExplicacaoZoneamento(zonaNome, zoneInfo, enderecoLimpo);
 
-        // 6. Salvar a consulta no histórico
         const consulta = new Consulta({
             usuario: req.user._id,
             endereco: enderecoLimpo,
@@ -82,7 +76,6 @@ const query = asyncHandler(async (req, res) => {
 
         await consulta.save();
 
-        // 7. Retornar resposta rica para o frontend
         res.status(200).json({
             resultado: {
                 zona: zoneInfo.zone,

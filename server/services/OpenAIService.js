@@ -32,7 +32,6 @@ class OpenAIService {
 
             const endereco = response.choices[0].message.content.trim();
 
-            // Verificar se é um endereço válido
             if (endereco.includes('ENDEREÇO_INVÁLIDO') || endereco.toLowerCase().includes('desculpe') || endereco.toLowerCase().includes('não consegui')) {
                 throw new Error('Não foi possível extrair um endereço válido da sua mensagem. Por favor, forneça um endereço ou rua específica em Londrina.');
             }

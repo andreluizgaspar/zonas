@@ -3,400 +3,260 @@
         "zone": "ZR1",
         "descricao": "Residencial Unifamiliar - Baixíssima Densidade",
         "loteMinimo": "500m²",
-        "frenteMinima": {
-            "meioQuadra": "15m",
-            "esquina": "20m"
-        },
+        "frenteMinima": {"meioQuadra": "15m", "esquina": "20m"},
+        "frenteMinimaLarguraMedia": {"meioQuadra": "15m", "esquina": "20m"},
         "taxaOcupacaoMaxima": "50%",
-        "coeficienteAproveitamento": {
-            "minimo": "0.05",
-            "basico": "1",
-            "maximo": "1"
-        },
+        "coeficienteAproveitamentoMaximo": "1",
         "alturaMaxima": "8m",
-        "recuoMinimo": "5m"
+        "recuoMinimo": "5m",
+        "afastamentosMinimos": {"abertura": "1.5m", "semAbertura": "1m"},
+        "unidadeHabitacionalCada": "Residência unifamiliar"
     },
     {
         "zone": "ZR2",
         "descricao": "Residencial Unifamiliar - Baixa Densidade",
         "loteMinimo": "360m²",
-        "frenteMinima": {
-            "meioQuadra": "12m",
-            "esquina": "17m"
-        },
+        "frenteMinima": {"meioQuadra": "12m", "esquina": "17m"},
+        "frenteMinimaLarguraMedia": {"meioQuadra": "12m", "esquina": "17m"},
         "taxaOcupacaoMaxima": "60%",
-        "coeficienteAproveitamento": {
-            "minimo": "0.05",
-            "basico": "1.2",
-            "maximo": "1.2"
-        },
+        "coeficienteAproveitamentoMaximo": "1.2",
         "alturaMaxima": "8m",
-        "recuoMinimo": "5m"
+        "recuoMinimo": "5m",
+        "afastamentosMinimos": {"abertura": "1.5m", "semAbertura": "1m"},
+        "unidadeHabitacionalCada": "Residência unifamiliar ou bifamiliar"
     },
     {
         "zone": "ZR3",
         "descricao": "Residencial - Média Densidade",
         "loteMinimo": "250m²",
-        "frenteMinima": {
-            "meioQuadra": "10m",
-            "esquina": "15m"
-        },
+        "frenteMinima": {"meioQuadra": "10m", "esquina": "15m"},
+        "frenteMinimaLarguraMedia": {"meioQuadra": "10m", "esquina": "15m"},
         "taxaOcupacaoMaxima": "65%",
-        "coeficienteAproveitamento": {
-            "minimo": "0.05",
-            "basico": "1.3",
-            "maximo": "1.3"
-        },
+        "coeficienteAproveitamentoMaximo": "1.3",
         "alturaMaxima": "8m",
-        "recuoMinimo": "5m"
+        "recuoMinimo": "5m",
+        "afastamentosMinimos": {"abertura": "1.5m", "semAbertura": "1m"},
+        "unidadeHabitacionalCada": "Residência multifamiliar até 4 unidades"
     },
     {
         "zone": "ZR4",
-        "descricao": "Média/Alta Densidade",
-        "parametrosBase_RU": {
-            "loteMinimo": "360m²",
-            "taxaOcupacaoMaxima": "60%"
-        },
-        "parametrosVerticais_RMV": {
-            "loteMinimo": "360m²",
-            "frenteMinima": {
-                "meioQuadra": "12m",
-                "esquina": "17m"
-            },
-            "taxaOcupacaoMaxima": "100% térreo, 60% 1º pav, 50% demais",
-            "coeficienteAproveitamento": {
-                "minimo": "0.05",
-                "basico": "2",
-                "maximo": "3.5"
-            }
-        }
+        "descricao": "Residencial - Média/Alta Densidade",
+        "loteMinimo": "360m²",
+        "frenteMinima": {"meioQuadra": "12m", "esquina": "17m"},
+        "frenteMinimaLarguraMedia": {"meioQuadra": "12m", "esquina": "17m"},
+        "taxaOcupacaoMaxima": "100% térreo, 60% 1º pavimento, 50% demais",
+        "coeficienteAproveitamentoMaximo": "3.5",
+        "alturaMaxima": "Sem limite específico",
+        "recuoMinimo": "5m",
+        "afastamentosMinimos": {"abertura": "1.5m", "semAbertura": "1m"},
+        "unidadeHabitacionalCada": "Residência multifamiliar com limite de altura"
     },
     {
         "zone": "ZR5",
-        "descricao": "Alta Densidade (Maior potencial construtivo da cidade)",
-        "parametrosBase_RU": {
-            "loteMinimo": "360m²",
-            "taxaOcupacaoMaxima": "60%"
-        },
-        "parametrosVerticais_RMV": {
-            "loteMinimo": "360m²",
-            "frenteMinima": {
-                "meioQuadra": "12m",
-                "esquina": "17m"
-            },
-            "taxaOcupacaoMaxima": "100% térreo, 60% 1º pav, 50% demais",
-            "coeficienteAproveitamento": {
-                "minimo": "0.05",
-                "basico": "2",
-                "maximo": "4"
-            }
-        }
+        "descricao": "Residencial - Alta Densidade (Maior potencial construtivo)",
+        "loteMinimo": "360m²",
+        "frenteMinima": {"meioQuadra": "12m", "esquina": "17m"},
+        "frenteMinimaLarguraMedia": {"meioQuadra": "12m", "esquina": "17m"},
+        "taxaOcupacaoMaxima": "100% térreo, 60% 1º pavimento, 50% demais",
+        "coeficienteAproveitamentoMaximo": "4",
+        "alturaMaxima": "Sem limite específico",
+        "recuoMinimo": "5m",
+        "afastamentosMinimos": {"abertura": "1.5m", "semAbertura": "1m"},
+        "unidadeHabitacionalCada": "Residência multifamiliar sem limite de altura"
     },
     {
         "zone": "ZR6",
         "descricao": "Chácaras Urbanas / Condomínios Horizontais Grandes",
         "loteMinimo": "2.500m²",
-        "frenteMinima": {
-            "meioQuadra": "25m",
-            "esquina": "30m"
-        },
-        "taxaOcupacaoMaxima": "30%",
-        "coeficienteAproveitamento": {
-            "minimo": "0.05",
-            "basico": "0.05",
-            "maximo": "0.3"
-        },
-        "alturaMaxima": "9m",
-        "recuoMinimo": "5m"
+        "frenteMinima": {"meioQuadra": "25m", "esquina": "30m"},
+        "frenteMinimaLarguraMedia": {"meioQuadra": "25m", "esquina": "30m"},
+        "taxaOcupacaoMaxima": "25%",
+        "coeficienteAproveitamentoMaximo": "0.5",
+        "alturaMaxima": "8m",
+        "recuoMinimo": "20m",
+        "afastamentosMinimos": {"abertura": "3m", "semAbertura": "2m"},
+        "unidadeHabitacionalCada": "Residência unifamiliar em lote grande"
     },
     {
         "zone": "ZR7",
-        "descricao": "Média Densidade com Verticalização Restrita",
-        "parametrosBase_RU": {
-            "loteMinimo": "500m²",
-            "taxaOcupacaoMaxima": "50%"
-        },
-        "parametrosVerticais_RMV": {
-            "loteMinimo": "2.000m²",
-            "frenteMinima": {
-                "meioQuadra": "25m",
-                "esquina": "30m"
-            },
-            "taxaOcupacaoMaxima": "80% térreo, 50% demais",
-            "coeficienteAproveitamento": {
-                "minimo": "0.05",
-                "basico": "2",
-                "maximo": "3.5"
-            }
-        }
+        "descricao": "Residencial em Zona de Transição",
+        "loteMinimo": "500m²",
+        "frenteMinima": {"meioQuadra": "15m", "esquina": "20m"},
+        "frenteMinimaLarguraMedia": {"meioQuadra": "15m", "esquina": "20m"},
+        "taxaOcupacaoMaxima": "55%",
+        "coeficienteAproveitamentoMaximo": "1.5",
+        "alturaMaxima": "8m",
+        "recuoMinimo": "5m",
+        "afastamentosMinimos": {"abertura": "1.5m", "semAbertura": "1m"},
+        "unidadeHabitacionalCada": "Residência unifamiliar ou pequeno multifamiliar"
     },
     {
         "zone": "ZR8",
-        "descricao": "Alta Densidade Vertical (Gleba Palhano / Novos Eixos)",
-        "parametrosBase_RU": {
-            "loteMinimo": "360m²",
-            "taxaOcupacaoMaxima": "60%"
-        },
-        "parametrosVerticais_RMV": {
-            "loteMinimo": "2.000m²",
-            "frenteMinima": {
-                "geral": "40m"
-            },
-            "taxaOcupacaoMaxima": "100% térreo, 60% 1º pav, 50% demais",
-            "coeficienteAproveitamento": {
-                "minimo": "0.05",
-                "basico": "2.0",
-                "maximo": "3.5"
-            }
-        }
+        "descricao": "Residencial em Área de Proteção",
+        "loteMinimo": "1.000m²",
+        "frenteMinima": {"meioQuadra": "20m", "esquina": "25m"},
+        "frenteMinimaLarguraMedia": {"meioQuadra": "20m", "esquina": "25m"},
+        "taxaOcupacaoMaxima": "30%",
+        "coeficienteAproveitamentoMaximo": "0.6",
+        "alturaMaxima": "8m",
+        "recuoMinimo": "10m",
+        "afastamentosMinimos": {"abertura": "2m", "semAbertura": "1.5m"},
+        "unidadeHabitacionalCada": "Residência unifamiliar em área protegida"
     },
     {
         "zone": "ZR9",
-        "descricao": "Alta Densidade Vertical (Gleba Palhano / Novos Eixos)",
-        "parametrosBase_RU": {
-            "loteMinimo": "360m²",
-            "taxaOcupacaoMaxima": "60%"
-        },
-        "parametrosVerticais_RMV": {
-            "loteMinimo": "2.000m²",
-            "frenteMinima": {
-                "geral": "40m"
-            },
-            "taxaOcupacaoMaxima": "100% térreo, 60% 1º pav, 50% demais",
-            "coeficienteAproveitamento": {
-                "minimo": "0.05",
-                "basico": "2.0",
-                "maximo": "3.5"
-            }
-        }
+        "descricao": "Residencial Rural",
+        "loteMinimo": "5.000m²",
+        "frenteMinima": {"meioQuadra": "30m", "esquina": "40m"},
+        "frenteMinimaLarguraMedia": {"meioQuadra": "30m", "esquina": "40m"},
+        "taxaOcupacaoMaxima": "15%",
+        "coeficienteAproveitamentoMaximo": "0.3",
+        "alturaMaxima": "8m",
+        "recuoMinimo": "30m",
+        "afastamentosMinimos": {"abertura": "5m", "semAbertura": "3m"},
+        "unidadeHabitacionalCada": "Residência unifamiliar rural"
     },
     {
         "zone": "ZI1",
-        "descricao": "Indústrias leves (IND-D), Comércio e Serviço",
-        "loteMinimo": "500m²",
-        "frenteMinima": {
-            "meioQuadra": "15m",
-            "esquina": "20m"
-        },
-        "taxaOcupacaoMaxima": "65%",
-        "coeficienteAproveitamentoMaximo": "1.3",
-        "peDireitoMinimo": "3.50m",
-        "recuoMinimo": "5m"
+        "descricao": "Indústria Leve - Baixa Densidade",
+        "loteMinimo": "1.000m²",
+        "frenteMinima": {"meioQuadra": "20m", "esquina": "25m"},
+        "frenteMinimaLarguraMedia": {"meioQuadra": "20m", "esquina": "25m"},
+        "taxaOcupacaoMaxima": "60%",
+        "coeficienteAproveitamentoMaximo": "1.2",
+        "alturaMaxima": "12m",
+        "recuoMinimo": "10m",
+        "afastamentosMinimos": {"abertura": "3m", "semAbertura": "2m"},
+        "unidadeHabitacionalCada": "Não permitido"
     },
     {
         "zone": "ZI2",
-        "descricao": "Indústrias de pequeno porte (IND-D e IND-C), Comércio e Serviço",
-        "loteMinimo": "600m²",
-        "frenteMinima": {
-            "meioQuadra": "15m",
-            "esquina": "20m"
-        },
-        "taxaOcupacaoMaxima": "80%",
-        "coeficienteAproveitamentoMaximo": "1.6",
-        "peDireitoMinimo": "4.00m",
-        "recuoMinimo": "5m"
+        "descricao": "Indústria Leve - Média Densidade",
+        "loteMinimo": "2.000m²",
+        "frenteMinima": {"meioQuadra": "25m", "esquina": "30m"},
+        "frenteMinimaLarguraMedia": {"meioQuadra": "25m", "esquina": "30m"},
+        "taxaOcupacaoMaxima": "70%",
+        "coeficienteAproveitamentoMaximo": "1.5",
+        "alturaMaxima": "15m",
+        "recuoMinimo": "10m",
+        "afastamentosMinimos": {"abertura": "3m", "semAbertura": "2m"},
+        "unidadeHabitacionalCada": "Não permitido"
     },
     {
         "zone": "ZI3",
-        "descricao": "Indústrias de pequeno e médio porte (IND-D, IND-C e IND-B), Comércio e Serviço",
-        "loteMinimo": "1.000m²",
-        "frenteMinima": {
-            "meioQuadra": "20m",
-            "esquina": "25m"
-        },
-        "taxaOcupacaoMaxima": "70%",
-        "coeficienteAproveitamentoMaximo": "1",
-        "peDireitoMinimo": "6.00m",
-        "recuoMinimo": "5m"
+        "descricao": "Indústria Pesada",
+        "loteMinimo": "5.000m²",
+        "frenteMinima": {"meioQuadra": "50m", "esquina": "60m"},
+        "frenteMinimaLarguraMedia": {"meioQuadra": "50m", "esquina": "60m"},
+        "taxaOcupacaoMaxima": "80%",
+        "coeficienteAproveitamentoMaximo": "2",
+        "alturaMaxima": "Sem limite específico",
+        "recuoMinimo": "20m",
+        "afastamentosMinimos": {"abertura": "5m", "semAbertura": "3m"},
+        "unidadeHabitacionalCada": "Não permitido"
     },
     {
         "zone": "ZI4",
-        "descricao": "Indústria Pesada (IND-D a IND-A), Comércio e Serviço",
-        "loteMinimo": "3.500m², 5.000m² ou 10.000m² (dependendo da porcentagem da área do loteamento)",
-        "frenteMinima": {
-            "geral": "50m"
-        },
-        "taxaOcupacaoMaxima": "65%",
-        "coeficienteAproveitamentoMaximo": "1",
-        "peDireitoMinimo": "6.00m",
-        "recuoMinimo": "10m"
+        "descricao": "Indústria Ultrapesada",
+        "loteMinimo": "10.000m²",
+        "frenteMinima": {"meioQuadra": "100m", "esquina": "120m"},
+        "frenteMinimaLarguraMedia": {"meioQuadra": "100m", "esquina": "120m"},
+        "taxaOcupacaoMaxima": "85%",
+        "coeficienteAproveitamentoMaximo": "2.5",
+        "alturaMaxima": "Sem limite específico",
+        "recuoMinimo": "30m",
+        "afastamentosMinimos": {"abertura": "10m", "semAbertura": "5m"},
+        "unidadeHabitacionalCada": "Não permitido"
     },
     {
         "zone": "ZC1",
         "descricao": "Zona Central 1 - Foco em comércio, serviço e uso misto",
-        "parametrosBase_RU": {
-            "loteMinimo": "500m²",
-            "frenteMinima": {
-                "meioQuadra": "15m",
-                "esquina": "20m"
-            },
-            "taxaOcupacaoMaxima": "50%",
-            "coeficienteAproveitamentoMaximo": "1",
-            "recuoMinimo": "5m"
-        },
-        "parametros_Comercio_Servico_Misto_RMV": {
-            "loteMinimo": "500m²",
-            "frenteMinima": {
-                "meioQuadra": "15m",
-                "esquina": "20m"
-            },
-            "taxaOcupacaoMaxima": "100% no térreo e nos dois primeiros pavimentos, 50% nos demais",
-            "coeficienteAproveitamento": {
-                "basico": "2",
-                "maximo": "3"
-            },
-            "recuoMinimo": "5m"
-        }
+        "loteMinimo": "500m²",
+        "frenteMinima": {"meioQuadra": "15m", "esquina": "20m"},
+        "frenteMinimaLarguraMedia": {"meioQuadra": "15m", "esquina": "20m"},
+        "taxaOcupacaoMaxima": "100% no térreo, 50% demais",
+        "coeficienteAproveitamentoMaximo": "3",
+        "alturaMaxima": "Sem limite específico",
+        "recuoMinimo": "5m",
+        "afastamentosMinimos": {"abertura": "1.5m", "semAbertura": "1m"},
+        "unidadeHabitacionalCada": "Comércio, serviço, misto"
     },
     {
         "zone": "ZC2",
         "descricao": "Zona Central 2 - Altíssima Densidade",
-        "parametrosBase_RU": {
-            "loteMinimo": "500m²",
-            "frenteMinima": {
-                "meioQuadra": "15m",
-                "esquina": "20m"
-            },
-            "taxaOcupacaoMaxima": "50%",
-            "coeficienteAproveitamentoMaximo": "1",
-            "recuoMinimo": "5m"
-        },
-        "parametros_Comercio_Servico_Misto_RMV": {
-            "loteMinimo": "500m²",
-            "frenteMinima": {
-                "meioQuadra": "15m",
-                "esquina": "20m"
-            },
-            "taxaOcupacaoMaxima": "100% no térreo e no primeiro pavimento, 50% nos demais",
-            "coeficienteAproveitamento": {
-                "basico": "2",
-                "maximo": "5"
-            },
-            "recuoMinimo": "5m"
-        }
+        "loteMinimo": "500m²",
+        "frenteMinima": {"meioQuadra": "15m", "esquina": "20m"},
+        "frenteMinimaLarguraMedia": {"meioQuadra": "15m", "esquina": "20m"},
+        "taxaOcupacaoMaxima": "100% no térreo e primeiro pavimento, 50% demais",
+        "coeficienteAproveitamentoMaximo": "5",
+        "alturaMaxima": "Sem limite específico",
+        "recuoMinimo": "5m",
+        "afastamentosMinimos": {"abertura": "1.5m", "semAbertura": "1m"},
+        "unidadeHabitacionalCada": "Comércio, serviço, misto, residencial"
     },
     {
         "zone": "ZC3",
         "descricao": "Corredores e Eixos Comerciais - Alta Densidade",
-        "parametrosBase_RU": {
-            "loteMinimo": "500m²",
-            "frenteMinima": {
-                "meioQuadra": "15m",
-                "esquina": "20m"
-            },
-            "taxaOcupacaoMaxima": "50%",
-            "coeficienteAproveitamentoMaximo": "1",
-            "recuoMinimo": "5m"
-        },
-        "parametros_Comercio_Servico_Misto_RMV": {
-            "loteMinimo": "500m²",
-            "frenteMinima": {
-                "meioQuadra": "15m",
-                "esquina": "20m"
-            },
-            "taxaOcupacaoMaxima": "100% no térreo, 80% no primeiro pavimento e 50% para os demais",
-            "coeficienteAproveitamento": {
-                "basico": "2",
-                "maximo": "4.5"
-            },
-            "recuoMinimo": "5m"
-        }
+        "loteMinimo": "500m²",
+        "frenteMinima": {"meioQuadra": "15m", "esquina": "20m"},
+        "frenteMinimaLarguraMedia": {"meioQuadra": "15m", "esquina": "20m"},
+        "taxaOcupacaoMaxima": "100% no térreo, 80% primeiro pavimento, 50% demais",
+        "coeficienteAproveitamentoMaximo": "4.5",
+        "alturaMaxima": "Sem limite específico",
+        "recuoMinimo": "5m",
+        "afastamentosMinimos": {"abertura": "1.5m", "semAbertura": "1m"},
+        "unidadeHabitacionalCada": "Comércio, serviço, misto"
     },
     {
         "zone": "ZC4",
         "descricao": "Comércio de Bairro / Média Alta Densidade",
-        "parametrosBase_RU": {
-            "loteMinimo": "360m²",
-            "frenteMinima": {
-                "meioQuadra": "12m",
-                "esquina": "17m"
-            },
-            "taxaOcupacaoMaxima": "60%",
-            "coeficienteAproveitamentoMaximo": "1.2",
-            "recuoMinimo": "5m"
-        },
-        "parametros_Comercio_Servico_Misto_RMV": {
-            "loteMinimo": "360m²",
-            "frenteMinima": {
-                "meioQuadra": "12m",
-                "esquina": "17m"
-            },
-            "taxaOcupacaoMaxima": "100% no térreo, 80% no primeiro pavimento e 50% nos demais",
-            "coeficienteAproveitamento": {
-                "basico": "2",
-                "maximo": "4"
-            },
-            "recuoMinimo": "5m"
-        }
+        "loteMinimo": "360m²",
+        "frenteMinima": {"meioQuadra": "12m", "esquina": "17m"},
+        "frenteMinimaLarguraMedia": {"meioQuadra": "12m", "esquina": "17m"},
+        "taxaOcupacaoMaxima": "100% no térreo, 80% primeiro pavimento, 50% demais",
+        "coeficienteAproveitamentoMaximo": "4",
+        "alturaMaxima": "Sem limite específico",
+        "recuoMinimo": "5m",
+        "afastamentosMinimos": {"abertura": "1.5m", "semAbertura": "1m"},
+        "unidadeHabitacionalCada": "Comércio local, serviço"
     },
     {
         "zone": "ZC5",
-        "descricao": "Comércio Pesado / Rodovias (Não permite Residencial Unifamiliar isolado)",
-        "parametros_Comercio_Servico_Misto_Ind": {
-            "loteMinimo": "1.000m²",
-            "frenteMinima": {
-                "meioQuadra": "20m",
-                "esquina": "25m"
-            },
-            "taxaOcupacaoMaxima": "100% no térreo, 80% nos dois primeiros pavimentos e 50% para os demais",
-            "coeficienteAproveitamento": {
-                "basico": "1.5",
-                "maximo": "2"
-            },
-            "recuoMinimo": "15m para datas voltadas para as Rodovias BR-369 e PR-445, 5m para os demais casos"
-        }
+        "descricao": "Comércio Pesado / Rodovias",
+        "loteMinimo": "1.000m²",
+        "frenteMinima": {"meioQuadra": "20m", "esquina": "25m"},
+        "frenteMinimaLarguraMedia": {"meioQuadra": "20m", "esquina": "25m"},
+        "taxaOcupacaoMaxima": "100% no térreo, 80% dois primeiros pavimentos, 50% demais",
+        "coeficienteAproveitamentoMaximo": "2",
+        "alturaMaxima": "Sem limite específico",
+        "recuoMinimo": "15m para rodovias BR-369 e PR-445, 5m demais casos",
+        "afastamentosMinimos": {"abertura": "2m", "semAbertura": "1.5m"},
+        "unidadeHabitacionalCada": "Comércio pesado"
     },
     {
         "zone": "ZC6",
-        "descricao": "Comércio Local em Eixos / Média Densidade (Limite de Altura)",
-        "parametrosBase_RU": {
-            "loteMinimo": "360m²",
-            "frenteMinima": {
-                "meioQuadra": "12m",
-                "esquina": "17m"
-            },
-            "taxaOcupacaoMaxima": "60%",
-            "coeficienteAproveitamentoMaximo": "1.2",
-            "recuoMinimo": "5m"
-        },
-        "parametros_Comercio_Servico_Misto_Inst": {
-            "loteMinimo": "360m²",
-            "frenteMinima": {
-                "meioQuadra": "12m",
-                "esquina": "17m"
-            },
-            "taxaOcupacaoMaxima": "80% da área livre do térreo e 50% nos demais pavimentos (não ultrapassando 3 pavimentos)",
-            "coeficienteAproveitamento": {
-                "basico": "2"
-            },
-            "recuoMinimo": "5m"
-        }
+        "descricao": "Comércio Local em Eixos / Média Densidade",
+        "loteMinimo": "360m²",
+        "frenteMinima": {"meioQuadra": "12m", "esquina": "17m"},
+        "frenteMinimaLarguraMedia": {"meioQuadra": "12m", "esquina": "17m"},
+        "taxaOcupacaoMaxima": "80% da área livre do térreo, 50% demais pavimentos",
+        "coeficienteAproveitamentoMaximo": "2",
+        "alturaMaxima": "Não ultrapassando 3 pavimentos",
+        "recuoMinimo": "5m",
+        "afastamentosMinimos": {"abertura": "1.5m", "semAbertura": "1m"},
+        "unidadeHabitacionalCada": "Comércio local"
     },
     {
         "zone": "ZC7",
-        "descricao": "Zona Comercial 7",
-        "parametrosBase_RU": {
-            "loteMinimo": "500m²",
-            "frenteMinima": {
-                "meioQuadra": "15m",
-                "esquina": "20m"
-            },
-            "taxaOcupacaoMaxima": "50%",
-            "coeficienteAproveitamentoMaximo": "1",
-            "recuoMinimo": "5m"
-        },
-        "parametros_Comercio_Servico_Misto_RMV": {
-            "loteMinimo": "2.000m²",
-            "frenteMinima": {
-                "meioQuadra": "15m",
-                "esquina": "20m"
-            },
-            "taxaOcupacaoMaxima": "65% no térreo e no primeiro pavimento, 50% nos demais",
-            "coeficienteAproveitamento": {
-                "basico": "2.0",
-                "maximo": "3.5"
-            },
-            "recuoMinimo": "5m"
-        }
+        "descricao": "Zona Comercial Premium / Alta Densidade",
+        "loteMinimo": "2.000m²",
+        "frenteMinima": {"meioQuadra": "15m", "esquina": "20m"},
+        "frenteMinimaLarguraMedia": {"meioQuadra": "15m", "esquina": "20m"},
+        "taxaOcupacaoMaxima": "65% no térreo e primeiro pavimento, 50% demais",
+        "coeficienteAproveitamentoMaximo": "3.5",
+        "alturaMaxima": "Sem limite específico",
+        "recuoMinimo": "5m",
+        "afastamentosMinimos": {"abertura": "2m", "semAbertura": "1.5m"},
+        "unidadeHabitacionalCada": "Comércio premium"
     }
 ]
