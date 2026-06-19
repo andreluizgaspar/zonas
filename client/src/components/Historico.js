@@ -99,7 +99,11 @@ const Historico = ({ usuario, onVisualizarConsulta }) => {
 
                             <div className="historico-coordenadas">
                                 <small>
-                                    {consulta.coordenadas.latitude.toFixed(4)}, {consulta.coordenadas.longitude.toFixed(4)}
+                                    {consulta.coordenadas ? (
+                                        `${consulta.coordenadas.latitude.toFixed(4)}, ${consulta.coordenadas.longitude.toFixed(4)}`
+                                    ) : (
+                                        'Dúvida Geral / Chat'
+                                    )}
                                 </small>
                             </div>
 

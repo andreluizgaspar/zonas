@@ -9,6 +9,9 @@ const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 });
 
+// Definido como gpt-4o-mini (modelo mini oficial e mais recente da OpenAI)
+const MODEL_NAME = 'gpt-4o-mini';
+
 const __dirname = path.resolve();
 let zonesData = [];
 try {
@@ -26,11 +29,11 @@ class OpenAIService {
             }
 
             const response = await openai.chat.completions.create({
-                model: "gpt-3.5-turbo",
+                model: MODEL_NAME,
                 messages: [
                     {
                         role: "system",
-                        content: "Você é um especialista em urbanismo de Londrina. Extraia o endereço da mensagem do usuário. Se mencionar apenas rua/avenida, complete com 'Londrina'. Retorne APENAS o endereço, de forma limpa. Se não houver endereço, retorne: ENDEREÇO_INVÁLIDO"
+                        content: "Você é um especialista em urbanismo de Londrina. Extraia o endereço ou CEP da mensagem do usuário. Se for fornecido um CEP (código postal com ou sem hífen, ex: 86060-630 ou 86060630), retorne apenas o CEP de forma limpa. Se mencionar apenas rua/avenida, complete com 'Londrina'. Retorne APENAS o endereço ou CEP limpo. Se não houver endereço ou CEP válido na mensagem, retorne: ENDEREÇO_INVÁLIDO"
                     },
                     {
                         role: "user",
@@ -76,7 +79,7 @@ class OpenAIService {
             `;
 
             const response = await openai.chat.completions.create({
-                model: "gpt-3.5-turbo",
+                model: MODEL_NAME,
                 messages: [
                     {
                         role: "system",
@@ -126,7 +129,7 @@ Consulte a legislação municipal para mais detalhes técnicos e restrições es
             }
 
             const response = await openai.chat.completions.create({
-                model: "gpt-3.5-turbo",
+                model: MODEL_NAME,
                 messages: [
                     {
                         role: "system",

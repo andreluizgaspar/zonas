@@ -58,11 +58,11 @@ const ResultadoZoneamento = ({ resultado, coordenadas, endereco, onSalvar }) => 
                         </div>
                         <div className="info-item">
                             <span className="label">Latitude:</span>
-                            <span className="valor">{coordenadas.latitude.toFixed(6)}</span>
+                            <span className="valor">{coordenadas?.latitude ? coordenadas.latitude.toFixed(6) : 'N/A'}</span>
                         </div>
                         <div className="info-item">
                             <span className="label">Longitude:</span>
-                            <span className="valor">{coordenadas.longitude.toFixed(6)}</span>
+                            <span className="valor">{coordenadas?.longitude ? coordenadas.longitude.toFixed(6) : 'N/A'}</span>
                         </div>
                     </div>
                 </section>
