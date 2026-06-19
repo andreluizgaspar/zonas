@@ -1,35 +1,15 @@
-import bcrypt from 'bcryptjs';
-
 const users = [
 	{
-		name: 'Admin',
-		email: 'admin@kosells.com',
-		password: bcrypt.hashSync('pass123', 12),
-		isAdmin: true,
-		isConfirmed: true,
-		avatar: '/images/icon_user.png',
+		name: 'Administrador Zonas',
+		email: 'admin@zonas.com',
+		password: 'senha123',
 	},
 	{
-		name: 'Rajat',
-		email: 'rajat@kosells.com',
-		password: bcrypt.hashSync('pass123', 12),
-		isConfirmed: true,
-		avatar: '/images/icon_user.png',
-	},
-	{
-		name: 'Ravi',
-		email: 'ravi@kosells.com',
-		password: bcrypt.hashSync('pass123', 12),
-		isConfirmed: true,
-		avatar: '/images/icon_user.png',
-	},
-	{
-		name: 'Voca',
-		email: 'dataxom889@flmmo.com',
-		password: bcrypt.hashSync('pass123', 12),
-		isConfirmed: true,
-		avatar: '/images/icon_user.png',
+		name: 'André Luiz',
+		email: 'andre@zonas.com',
+		password: 'senha123',
 	},
 ];
 
 export default users;
+

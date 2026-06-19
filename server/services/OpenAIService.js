@@ -1,11 +1,21 @@
 import { OpenAI } from 'openai';
 import dotenv from 'dotenv';
+import fs from 'fs';
+import path from 'path';
 
 dotenv.config();
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 });
+
+const __dirname = path.resolve();
+let zonesData = [];
+try {
+    zonesData = JSON.parse(fs.readFileSync(path.join(__dirname, 'zones.json'), 'utf8'));
+} catch (err) {
+    console.error('Erro ao ler zones.json no OpenAIService:', err);
+}
 
 class OpenAIService {
     async extrairEndereco(query) {
@@ -106,6 +116,40 @@ Para o endereço ${endereco} na zona ${zona}, aqui estão os detalhes da regulam
 
 Consulte a legislação municipal para mais detalhes técnicos e restrições específicas.
         `.trim();
+    }
+
+    async responderDuvidaGeral(pergunta) {
+        try {
+            if (!process.env.OPENAI_API_KEY) {
+                console.error('OPENAI_API_KEY não configurada no .env');
+                return "Desculpe, o serviço de IA não está configurado no momento.";
+            }
+
+            const response = await openai.chat.completions.create({
+                model: "gpt-3.5-turbo",
+                messages: [
+                    {
+                        role: "system",
+                        content: `Você é um arquiteto, urbanista e assistente especialista em zoneamento e planejamento urbano da cidade de Londrina, PR. 
+Use a tabela de zonas e parâmetros abaixo para responder às dúvidas do cidadão com precisão, clareza e termos simplificados.
+Se a pergunta não for relacionada a urbanismo, zoneamento, recuos, coeficientes de aproveitamento, taxas de ocupação ou Londrina, responda educadamente que você é especializado apenas no zoneamento urbano de Londrina.
+
+Zonas e parâmetros urbanísticos de Londrina:
+${JSON.stringify(zonesData, null, 2)}`
+                    },
+                    {
+                        role: "user",
+                        content: pergunta
+                    }
+                ],
+                temperature: 0.5,
+            });
+
+            return response.choices[0].message.content.trim();
+        } catch (error) {
+            console.error('Erro ao responder dúvida geral com OpenAI:', error.message || error);
+            return "Desculpe, ocorreu um erro ao processar sua pergunta com a inteligência artificial.";
+        }
     }
 }
 

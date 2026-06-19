@@ -19,74 +19,136 @@ const query = asyncHandler(async (req, res) => {
 
     try {
         let enderecoLimpo;
+        let isGeneralQuery = false;
+        let explicacaoIA;
+
         try {
             enderecoLimpo = await OpenAIService.extrairEndereco(userQuery);
             console.log(`Endereço extraído: ${enderecoLimpo}`);
         } catch (extractError) {
-            res.status(400).json({ error: extractError.message });
-            return;
+            console.log(`Falha ao extrair endereço, tratando como dúvida geral: ${extractError.message}`);
+            isGeneralQuery = true;
         }
 
         let coordenadas;
-        try {
-            coordenadas = await processadorEndereco.converterEnderecoParaCoordenadas(enderecoLimpo);
-        } catch (geocodeError) {
-            res.status(404).json({ error: geocodeError.message });
-            return;
-        }
-        console.log('Coordenadas obtidas:', coordenadas);
-
-        if (!coordenadas || !coordenadas.latitude) {
-            res.status(404).json({ error: 'Não foi possível encontrar a localização para este endereço.' });
-            return;
-        }
-
-        const zonaNome = await apiArcGIS.consultarZoneamento(coordenadas.latitude, coordenadas.longitude);
-        console.log(`Zona identificada: ${zonaNome}`);
-
-        if (!zonaNome) {
-            res.status(404).json({ error: 'Não encontramos zoneamento para este local em Londrina.' });
-            return;
+        if (!isGeneralQuery) {
+            try {
+                coordenadas = await processadorEndereco.converterEnderecoParaCoordenadas(enderecoLimpo);
+                console.log('Coordenadas obtidas:', coordenadas);
+                if (!coordenadas || !coordenadas.latitude) {
+                    isGeneralQuery = true;
+                }
+            } catch (geocodeError) {
+                console.log(`Falha ao geocodificar, tratando como dúvida geral: ${geocodeError.message}`);
+                isGeneralQuery = true;
+            }
         }
 
-        const zoneInfo = await databaseService.getZoneInfo(zonaNome);
+        let zonaNome;
+        let zoneInfo;
+        if (!isGeneralQuery) {
+            try {
+                zonaNome = await apiArcGIS.consultarZoneamento(coordenadas.latitude, coordenadas.longitude);
+                console.log(`Zona identificada: ${zonaNome}`);
+                
+                if (!zonaNome) {
+                    isGeneralQuery = true;
+                } else {
+                    zoneInfo = await databaseService.getZoneInfo(zonaNome);
+                    if (!zoneInfo) {
+                        isGeneralQuery = true;
+                    }
+                }
+            } catch (arcgisError) {
+                console.log(`Falha ao obter zoneamento do ArcGIS, tratando como dúvida geral: ${arcgisError.message}`);
+                isGeneralQuery = true;
+            }
+        }
 
-        if (!zoneInfo) {
-            res.status(404).json({ error: `Informações técnicas para a zona ${zonaNome} não encontradas no sistema.` });
+        if (isGeneralQuery) {
+            // Responder dúvida geral
+            explicacaoIA = await OpenAIService.responderDuvidaGeral(userQuery);
+            
+            // Salvar no histórico
+            const consulta = new Consulta({
+                usuario: req.user._id,
+                endereco: userQuery, // usa a própria dúvida como "endereço" para identificação no histórico
+                resultado: {
+                    resumo: explicacaoIA
+                }
+            });
+            await consulta.save();
+
+            res.status(200).json({
+                resultado: null,
+                resumo: explicacaoIA,
+                endereco: userQuery,
+                coordenadas: null
+            });
             return;
         }
 
-        const explicacaoIA = await OpenAIService.gerarExplicacaoZoneamento(zonaNome, zoneInfo, enderecoLimpo);
+        explicacaoIA = await OpenAIService.gerarExplicacaoZoneamento(zonaNome, zoneInfo, enderecoLimpo);
+
+        // Helper to parse numeric values from strings (e.g. "5m" -> 5, "50%" -> 50)
+        const parseNumber = (val) => {
+            if (!val) return undefined;
+            if (typeof val === 'number') return val;
+            const cleaned = val.replace(/[^0-9.,]/g, '').replace(',', '.');
+            const num = parseFloat(cleaned);
+            return isNaN(num) ? undefined : num;
+        };
+
+        const zone = zoneInfo.zone;
+        
+        let categoria = 'Outros';
+        if (zone.startsWith('ZR')) categoria = 'Residencial';
+        else if (zone.startsWith('ZC')) categoria = 'Central / Comercial';
+        else if (zone.startsWith('ZI')) categoria = 'Industrial';
+
+        const parts = (zoneInfo.descricao || '').split(' - ');
+        const hierarquia = parts.length > 1 ? parts[1] : (zoneInfo.descricao || '');
+
+        const caracteristicas = `${zoneInfo.descricao || ''}. Tipologia permitida: ${zoneInfo.unidadeHabitacionalCada || ''}.`;
+
+        const acessoLei = `Lei Municipal nº 12.236/2015 de Londrina. Regulamenta o zoneamento para a zona ${zone}.`;
+
+        const recuos = {
+            frontal: parseNumber(zoneInfo.recuoMinimo) || 5,
+            lateral: zoneInfo.afastamentosMinimos ? (parseNumber(zoneInfo.afastamentosMinimos.abertura) || 1.5) : 1.5,
+            fundos: zoneInfo.afastamentosMinimos ? (parseNumber(zoneInfo.afastamentosMinimos.semAbertura) || 1.0) : 1.0,
+            entreBloco: 0,
+        };
+
+        const parametrosUrbanisticos = {
+            coeficienteAproveitamento: parseNumber(zoneInfo.coeficienteAproveitamentoMaximo) || 1.0,
+            taxaOcupacao: parseNumber(zoneInfo.taxaOcupacaoMaxima) || 50,
+            alturaMaxima: parseNumber(zoneInfo.alturaMaxima) || 8,
+            vagas: 1,
+        };
+
+        const resultadoCalculado = {
+            zona: zone,
+            categoria: categoria,
+            hierarquia: hierarquia,
+            caracteristicas: caracteristicas,
+            acessoLei: acessoLei,
+            resumo: explicacaoIA,
+            recuos: recuos,
+            parametrosUrbanisticos: parametrosUrbanisticos,
+        };
 
         const consulta = new Consulta({
             usuario: req.user._id,
             endereco: enderecoLimpo,
             coordenadas: coordenadas,
-            resultado: {
-                zona: zoneInfo.zone,
-                unidadeHabitacional: zoneInfo.unidadeHabitacionalCada,
-                frenteMinima: zoneInfo.frenteMinimaLarguraMedia?.meioQuadra,
-                taxaOcupacao: zoneInfo.taxaOcupacaoMaxima,
-                coeficienteAproveitamento: zoneInfo.coeficienteAproveitamentoMaximo,
-                alturaMaxima: zoneInfo.alturaMaxima,
-                recuoMinimo: zoneInfo.recuoMinimo,
-                resumo: explicacaoIA
-            },
+            resultado: resultadoCalculado,
         });
 
         await consulta.save();
 
         res.status(200).json({
-            resultado: {
-                zona: zoneInfo.zone,
-                descricao: zoneInfo.descricao,
-                categoria: zoneInfo.categoria,
-                hierarquia: zoneInfo.hierarquia,
-                caracteristicas: zoneInfo.caracteristicas,
-                acessoLei: zoneInfo.acessoLei,
-                recuos: zoneInfo.recuos,
-                parametrosUrbanisticos: zoneInfo.parametrosUrbanisticos,
-            },
+            resultado: resultadoCalculado,
             resumo: explicacaoIA,
             endereco: enderecoLimpo,
             coordenadas: coordenadas
