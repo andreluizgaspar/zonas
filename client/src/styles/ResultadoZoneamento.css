@@ -154,12 +154,13 @@
 }
 
 .recuo-card {
-    background: #f8fafc;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
     padding: 24px;
     border-radius: 20px;
     text-align: center;
-    box-shadow: var(--shadow-neo);
-    border: 1px solid white;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--glass-border);
 }
 
 .recuo-label {
@@ -187,7 +188,8 @@
 }
 
 .parametro-card {
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
     border: 1px solid var(--glass-border);
     padding: 20px;
     border-radius: 16px;
@@ -195,9 +197,10 @@
 }
 
 .parametro-card:hover {
-    background: white;
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--primary);
     transform: translateY(-4px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--shadow-md);
 }
 
 .parametro-label {
@@ -223,16 +226,18 @@
     line-height: 1.7;
     font-size: 14px;
     padding: 20px;
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
     border-radius: 16px;
     border-left: 4px solid var(--primary);
 }
 
 .info-box {
-    background: #f1f5f9;
+    background: rgba(15, 23, 42, 0.4);
     border-radius: 20px;
     padding: 24px;
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
 }
 
 .info-grid {
