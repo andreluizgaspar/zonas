@@ -50,7 +50,7 @@ const query = asyncHandler(async (req, res) => {
             try {
                 zonaNome = await apiArcGIS.consultarZoneamento(coordenadas.latitude, coordenadas.longitude);
                 console.log(`Zona identificada: ${zonaNome}`);
-                
+
                 if (!zonaNome) {
                     isGeneralQuery = true;
                 } else {
@@ -66,13 +66,11 @@ const query = asyncHandler(async (req, res) => {
         }
 
         if (isGeneralQuery) {
-            // Responder dúvida geral
             explicacaoIA = await OpenAIService.responderDuvidaGeral(userQuery);
-            
-            // Salvar no histórico
+
             const consulta = new Consulta({
                 usuario: req.user._id,
-                endereco: userQuery, // usa a própria dúvida como "endereço" para identificação no histórico
+                endereco: userQuery,
                 resultado: {
                     resumo: explicacaoIA
                 }
@@ -90,7 +88,6 @@ const query = asyncHandler(async (req, res) => {
 
         explicacaoIA = await OpenAIService.gerarExplicacaoZoneamento(zonaNome, zoneInfo, enderecoLimpo);
 
-        // Helper to parse numeric values from strings (e.g. "5m" -> 5, "50%" -> 50)
         const parseNumber = (val) => {
             if (!val) return undefined;
             if (typeof val === 'number') return val;
@@ -100,7 +97,7 @@ const query = asyncHandler(async (req, res) => {
         };
 
         const zone = zoneInfo.zone;
-        
+
         let categoria = 'Outros';
         if (zone.startsWith('ZR')) categoria = 'Residencial';
         else if (zone.startsWith('ZC')) categoria = 'Central / Comercial';

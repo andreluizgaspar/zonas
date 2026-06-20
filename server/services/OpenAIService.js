@@ -9,7 +9,6 @@ const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 });
 
-// Definido como gpt-4o-mini (modelo mini oficial e mais recente da OpenAI)
 const MODEL_NAME = 'gpt-4o-mini';
 
 const __dirname = path.resolve();
