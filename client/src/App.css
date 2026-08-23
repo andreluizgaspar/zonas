@@ -81,6 +81,20 @@ body {
     opacity: 0.8;
 }
 
+.btn-toggle-sidebar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    color: var(--text-main);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
 .btn-toggle-sidebar svg {
     width: 20px;
     height: 20px;
@@ -98,6 +112,7 @@ body {
 
 .btn-toggle-sidebar:hover {
     background: rgba(255, 255, 255, 0.12);
+    border-color: var(--glass-border-light);
     transform: translateY(-2px);
     box-shadow: var(--shadow-sm);
 }

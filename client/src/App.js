@@ -94,16 +94,25 @@ function App() {
                 <div className="navbar-container">
                     <div className="navbar-left">
                         {user && (
-                            <button className="btn-toggle-sidebar" onClick={toggleSidebar}>
-                                {sidebarOpen ? (
-                                    <svg viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M15 18H9V8h6m2-2H7c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z" />
-                                    </svg>
-                                ) : (
-                                    <svg viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-6-4h-2v-2h2v2zm0-4h-2V7h2v4z" />
-                                    </svg>
-                                )}
+                            <button
+                                className="btn-toggle-sidebar"
+                                onClick={toggleSidebar}
+                                title={sidebarOpen ? 'Fechar histórico' : 'Abrir histórico'}
+                                aria-label={sidebarOpen ? 'Fechar histórico' : 'Abrir histórico'}
+                            >
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round">
+                                    <rect x="3" y="4" width="18" height="16" rx="2" />
+                                    <line x1="9.5" y1="4" x2="9.5" y2="20" />
+                                    <rect
+                                        x="4.5"
+                                        y="5.5"
+                                        width="4"
+                                        height="13"
+                                        rx="0.5"
+                                        fill={sidebarOpen ? 'currentColor' : 'none'}
+                                        stroke="none"
+                                    />
+                                </svg>
                             </button>
                         )}
                         <div className="navbar-brand">
