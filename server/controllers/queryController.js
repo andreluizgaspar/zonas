@@ -91,8 +91,12 @@ const query = asyncHandler(async (req, res) => {
         const parseNumber = (val) => {
             if (!val) return undefined;
             if (typeof val === 'number') return val;
-            const cleaned = val.replace(/[^0-9.,]/g, '').replace(',', '.');
-            const num = parseFloat(cleaned);
+            // Alguns campos descrevem múltiplos valores em texto (ex.: "100% no
+            // térreo, 60% no 1º andar, 50% acima") — pega só o primeiro número,
+            // em vez de concatenar todos os dígitos do texto em um valor inválido.
+            const match = val.match(/(\d+(?:[.,]\d+)?)/);
+            if (!match) return undefined;
+            const num = parseFloat(match[1].replace(',', '.'));
             return isNaN(num) ? undefined : num;
         };
 

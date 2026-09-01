@@ -38,6 +38,7 @@ function App() {
             setUser(data);
             setEmail('');
             setPassword('');
+            setConsultaVisualizada(null);
         } catch (error) {
             setLoginError('Email ou senha inválidos');
             console.error('Login error:', error);
@@ -65,6 +66,7 @@ function App() {
             setName('');
             setEmail('');
             setPassword('');
+            setConsultaVisualizada(null);
         } catch (error) {
             setRegisterError('Erro ao registrar. Email pode já estar em uso.');
             console.error('Register error:', error);
@@ -77,7 +79,27 @@ function App() {
         setName('');
         setEmail('');
         setPassword('');
+        setConsultaVisualizada(null);
     };
+
+    // Sessão expirada: se uma chamada autenticada (com Bearer token) voltar 401,
+    // o token não é mais válido — força logout em vez de deixar a UI em estado inconsistente.
+    useEffect(() => {
+        const interceptorId = axios.interceptors.response.use(
+            (response) => response,
+            (error) => {
+                const status = error.response?.status;
+                const hadAuthHeader = !!error.config?.headers?.Authorization;
+                if (status === 401 && hadAuthHeader) {
+                    handleLogout();
+                }
+                return Promise.reject(error);
+            }
+        );
+
+        return () => axios.interceptors.response.eject(interceptorId);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const toggleSidebar = () => {
         setSidebarOpen(!sidebarOpen);

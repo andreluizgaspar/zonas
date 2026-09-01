@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
@@ -40,6 +40,13 @@ const Chat = ({ usuario, showHistorico = false, consultaVisualizada = null }) =>
     const [carregando, setCarregando] = useState(false);
     const [ultimoResultado, setUltimoResultado] = useState(null);
     const [ultimasCoordenadas, setUltimasCoordenadas] = useState(null);
+    const messagesEndRef = useRef(null);
+
+    // Rola o chat para a mensagem mais recente sempre que a conversa muda,
+    // para não dar a impressão de que a mensagem enviada "sumiu".
+    useEffect(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }, [messages, carregando]);
 
     // Restaurar consulta quando o usuário clica "Ver" no histórico
     useEffect(() => {
@@ -161,6 +168,7 @@ const Chat = ({ usuario, showHistorico = false, consultaVisualizada = null }) =>
                             <span>Processando endereço...</span>
                         </div>
                     )}
+                    <div ref={messagesEndRef} />
                 </div>
                 <div className="input-area">
                     <input

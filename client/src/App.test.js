@@ -8,6 +8,9 @@ jest.mock('axios', () => ({
     post: jest.fn(),
     get: jest.fn(() => Promise.resolve({ data: [] })),
     delete: jest.fn(),
+    interceptors: {
+      response: { use: jest.fn(() => 0), eject: jest.fn() },
+    },
   },
 }));
 
